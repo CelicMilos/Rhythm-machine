@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ritam masina</title>
+    <link rel="stylesheet" href="stilovi.css">
+</head>
+<body>
+   <div class="sekvencer">
+       <div class="kick-track">
+           <div class="kontrole">
+               <h1>Kick</h1>
+               <button data-track="0" class="mute kick-volume">
+                <i class="fas fa-volume-mute"></i>
+               </button>
+               <select name="kick-select" id="kick-select">
+                   <option value="./zvukovi/kick-808.wav">Kick 808</option>
+                   <option value="./zvukovi/kick-acoustic01.wav">Kick Acoustic</option>
+                   <option value="./zvukovi/kick-classic.wav">Kick Classic</option>
+                   <option value="./zvukovi/kick-big.wav">Kick Big</option>
+                   <option value="./zvukovi/kick-deep.wav">Kick Deep</option>
+               </select>
+           </div>
+           <div class="kick">
+               <div class="pad kick-pad b0"></div>
+               <div class="pad kick-pad b1"></div>
+               <div class="pad kick-pad b2"></div>
+               <div class="pad kick-pad b3"></div>
+               <div class="pad kick-pad b4"></div>
+               <div class="pad kick-pad b5"></div>
+               <div class="pad kick-pad b6"></div>
+               <div class="pad kick-pad b7"></div>
+             </div>
+       </div>
+       <div class="snare-track">
+        <div class="kontrole">
+            <h1>Snare</h1>
+            <button data-track="1" class="mute snare-volume">
+             <i class="fas fa-volume-mute"></i>
+            </button>
+            <select name="snare-select" id="snare-select">
+                <option value="./zvukovi/snare-808.wav">Snare 808</option>
+                <option value="./zvukovi/snare-acoustic01.wav">Snare Acoustic</option>
+                <option value="./zvukovi/snare-big.wav">Snare </option>
+                <option value="./zvukovi/snare-electro.wav">Snare Electro</option>
+                <option value="./zvukovi/snare-lofi01.wav">Snare LoFi</option>
+            </select>
+        </div>
+        <div class="snare">
+            <div class="pad snare-pad b0"></div>
+            <div class="pad snare-pad b1"></div>
+            <div class="pad snare-pad b2"></div>
+            <div class="pad snare-pad b3"></div>
+            <div class="pad snare-pad b4"></div>
+            <div class="pad snare-pad b5"></div>
+            <div class="pad snare-pad b6"></div>
+            <div class="pad snare-pad b7"></div>
+          </div>
+    </div>
+    <div class="hihat-track">
+        <div class="kontrole">
+            <h1>Hihat</h1>
+            <button data-track="2" class="mute hihat-volume">
+             <i class="fas fa-volume-mute"></i>
+            </button>
+            <select name="hihat-select" id="hihat-select">
+                <option value="./zvukovi/hihat-808.wav">Hihat 808</option>
+                <option value="./zvukovi/hihat-acoustic01.wav">Hihat Acoustic</option>
+                <option value="./zvukovi/hihat-analog.wav">Hihat Analog</option>
+                <option value="./zvukovi/hihat-digital.wav">Hihat Digital</option>
+                <option value="./zvukovi/hihat-electro.wav">Hihat Electro</option>
+            </select>
+        </div>
+        <div class="hihat">
+            <div class="pad hihat-pad b0"></div>
+            <div class="pad hihat-pad b1"></div>
+            <div class="pad hihat-pad b2"></div>
+            <div class="pad hihat-pad b3"></div>
+            <div class="pad hihat-pad b4"></div>
+            <div class="pad hihat-pad b5"></div>
+            <div class="pad hihat-pad b6"></div>
+            <div class="pad hihat-pad b7"></div>
+          </div>
+        </div>
+        <button class="play">PLAY</button>
+        <div class="tempo">
+            <input type="range" class="tempo-slider" max="300" min="20" value="150">
+            <p>Tempo: <span class="tempo-nbr">150</span></p>
+        </div>
+    
+    </div>
+    
+    <audio class="kick-sound " src="./zvukovi/kick-classic.wav"></audio>
+    <audio class="hihat-sound" src="./zvukovi/hihat-electro.wav"></audio>
+    <audio class="snare-sound" src="./zvukovi/snare-electro.wav"></audio>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+   <script src="app.js"></script>
+</body>
+</html>
+      
