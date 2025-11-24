@@ -1,0 +1,210 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+body{
+    font-family: sans-serif;
+    background: linear-gradient(260deg, rgb(5, 2, 10) 0%, rgba(28, 30, 44, 0.844) 42%, rgb(15, 15, 14) 100%); 
+    height: 100vh;
+    overflow: hidden; /* da nema skrolovanja */
+    display: flex;
+    flex-direction: column;
+}
+.gornja-sekcija {
+    height: 50vh;            /* gornja polovina */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.donja-sekcija {
+    height: 50vh;            /* donja polovina */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid rgba(255,255,255,0.1);
+}
+i,svg{
+    pointer-events: none;
+}
+.sekvencer{
+ display:flex;
+ min-height:auto;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+
+}
+h1{
+    color:rgb(207, 207, 207);
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin:1rem;
+    
+}
+.kick-pad,
+.snare-pad,
+.hihat-pad{
+    width: 3rem;
+    height: 4rem;
+    margin:0.7rem 0.7rem;
+    cursor:pointer;
+
+    
+}
+.kick-pad{
+    background-color:rgb(174, 236, 88) ;
+}
+.kick-pad.active,.kick-pad:hover{
+    background-color:rgb(202, 242, 186) ;
+
+}
+.snare-pad{
+    background-color:rgb(85, 82, 255) ;
+
+}
+.snare-pad.active,.snare-pad:hover{
+    background-color:rgb(187, 186, 233) ;
+
+}
+.hihat-pad{
+    background-color:rgb(245, 86, 86) ;
+}
+.hihat-pad.active,.hihat-pad:hover{
+    background-color:rgb(243, 183, 183) ;
+
+}
+.pad{
+    transition: all 0.2s ease;
+}
+
+.kick,
+.snare,
+.hihat{
+    display: flex;
+}
+.kick-track,
+.snare-track,
+.hihat-track{
+    display:flex;
+    align-items: center;
+    width:70%;
+    justify-content: space-between;
+    margin-top:2rem;
+}
+.kontrole{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex:1;
+    margin:0rem 1rem;
+}
+select{
+    display: inline-block;
+    padding: 4px 3px 5px 5px;
+    width: 150px;
+    outline: none;
+    color: rgb(172, 172, 172);
+    border: 1px solid #C8BFC4;
+    border-radius: 4px;
+    box-shadow: inset 1px 1px 2px #ddd8dc;
+    background-color: rgba(70, 72, 80, 0.844);
+    font-size: 1rem;
+    font-weight: 600;
+}
+select option{
+    color:rgb(207, 207, 207);
+    background-color:rgba(38, 41, 61, 0.2);
+ }
+ 
+ select option:hover{
+    background-color:rgba(118, 141, 49, 0.2);
+ }
+ .mute{
+     width:3rem;
+     height:2rem;
+     background-color: rgb(43, 43, 54);
+     color:white;
+     font-size: 1rem;
+     border-radius:5px;
+     
+ }
+ .mute.active{
+    background: rgb(160, 159, 159);
+ }
+ .transport-kontrole {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;       /* razmak između dugmadi */
+    margin-top: 2rem;
+}
+ .play{
+     width:10rem;
+     height:3rem;
+     border-radius:10px;
+     color:white;
+     background-color:rgb(52, 52, 58);
+     margin-top:3rem;
+     font-size:1.5rem;
+ }
+ .play:hover{
+    background-color:rgb(103, 103, 116);
+
+ }
+ .play.active{
+    background-color:rgb(103, 103, 116);
+
+ }
+ .reset {
+    width: 10rem;
+    height: 3rem;
+    border-radius: 10px;
+    color: white;
+    background-color: rgb(52, 52, 58);
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    margin:0rem 1rem
+}
+
+.reset:hover {
+    background-color: rgb(103, 103, 116);
+}
+
+ @keyframes playTrack{
+     from{
+        transform:scaleY(1);
+        transform-origin: bottom;
+     }
+     to{
+        transform:scaleY(1.3);
+        transform-origin: bottom;
+     }
+
+ }
+ .tempo{
+     margin:3rem;
+     width: 30%;
+ }
+.tempo-slider{
+    padding:0.3rem;
+    appearance: none;
+    margin:1rem 0rem;
+    width:100%;
+    position:relative;
+    background-color:rgb(125, 125, 139);
+    border:1px white;
+    border-radius: 1rem;
+    cursor: pointer;
+    
+
+}
+.tempo p{
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
+}
