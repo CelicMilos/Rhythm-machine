@@ -9,18 +9,19 @@ class Drumkit {
     this.hihatAudio = document.querySelector(".hihat-sound");
     this.playBtn = document.querySelector(".play");
     this.index = 0;
-    this.bpm = 250;
+    this.bpm = 150;
     this.isplaying = null;
     this.selects = document.querySelectorAll("select");
     this.muteBtns = document.querySelectorAll(".mute");
     this.tempoSlider = document.querySelector(".tempo-slider");
+    this.resetBtn = document.querySelector(".reset");
   }
   activePad() {
     this.classList.toggle("active");
   }
 
   repeat() {
-    let step = this.index % 8;
+    let step = this.index % 12;
     const activeBars = document.querySelectorAll(`.b${step}`);
     //ponavljanje padova
     activeBars.forEach((bar) => {
@@ -120,6 +121,32 @@ class Drumkit {
       this.start();
     }
   }
+  reset() {
+    // 1. Zaustavi loop
+    clearInterval(this.isPlaying);
+    this.isPlaying = null;
+
+    // 2. Reset indeks
+    this.index = 0;
+
+    // 3. Ukloni sve active padove i animacije
+    this.pads.forEach((pad) => {
+      pad.classList.remove("active");
+      pad.style.animation = "none";
+    });
+
+    // 4. Vrati PLAY dugme u stanje početka
+    this.playBtn.classList.remove("active");
+    this.playBtn.innerText = "PLAY";
+
+    // 5. Zaustavi sve zvuke
+    this.kickAudio.pause();
+    this.kickAudio.currentTime = 0;
+    this.snareAudio.pause();
+    this.snareAudio.currentTime = 0;
+    this.hihatAudio.pause();
+    this.hihatAudio.currentTime = 0;
+  }
 }
 const drumKit = new Drumkit();
 drumKit.pads.forEach((pad) => {
@@ -150,4 +177,8 @@ drumKit.tempoSlider.addEventListener("input", function (e) {
 
 drumKit.tempoSlider.addEventListener("change", function (e) {
   drumKit.updateTempo(e);
+});
+
+drumKit.resetBtn.addEventListener("click", () => {
+  drumKit.reset();
 });
