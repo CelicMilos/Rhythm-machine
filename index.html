@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,12 +18,13 @@
             </button>
             <select name="kick-select" id="kick-select">
               <option value="./zvukovi/kick-808.wav">Kick 808</option>
-              <option value="./zvukovi/kick-acoustic01.wav">
-                Kick Acoustic
-              </option>
+              <option value="./zvukovi/kick-acoustic01.wav">Kick Acoustic</option>
               <option value="./zvukovi/kick-classic.wav">Kick Classic</option>
               <option value="./zvukovi/kick-big.wav">Kick Big</option>
               <option value="./zvukovi/kick-deep.wav">Kick Deep</option>
+              <option value="./zvukovi/kick-dry.wav">Kick Dry</option>
+              <option value="./zvukovi/kick-floppy.wav">Kick Floppy</option>
+              <option value="./zvukovi/kick-gritty.wav">Kick Gritty</option>
             </select>
           </div>
           <div class="kick">
@@ -49,9 +50,7 @@
             </button>
             <select name="snare-select" id="snare-select">
               <option value="./zvukovi/snare-808.wav">Snare 808</option>
-              <option value="./zvukovi/snare-acoustic01.wav">
-                Snare Acoustic
-              </option>
+              <option value="./zvukovi/snare-acoustic01.wav">Snare Acoustic</option>
               <option value="./zvukovi/snare-big.wav">Snare</option>
               <option value="./zvukovi/snare-electro.wav">Snare Electro</option>
               <option value="./zvukovi/snare-lofi01.wav">Snare LoFi</option>
@@ -80,9 +79,7 @@
             </button>
             <select name="hihat-select" id="hihat-select">
               <option value="./zvukovi/hihat-808.wav">Hihat 808</option>
-              <option value="./zvukovi/hihat-acoustic01.wav">
-                Hihat Acoustic
-              </option>
+              <option value="./zvukovi/hihat-acoustic01.wav">Hihat Acoustic</option>
               <option value="./zvukovi/hihat-analog.wav">Hihat Analog</option>
               <option value="./zvukovi/hihat-digital.wav">Hihat Digital</option>
               <option value="./zvukovi/hihat-electro.wav">Hihat Electro</option>
@@ -119,18 +116,45 @@
         </div>
       </div>
       </div>
-
       <audio class="kick-sound" src="./zvukovi/kick-classic.wav"></audio>
       <audio class="hihat-sound" src="./zvukovi/hihat-electro.wav"></audio>
       <audio class="snare-sound" src="./zvukovi/snare-electro.wav"></audio>
-      <script
+    </div>
+    <div class="lower-section">
+      <div class="piano">
+        <div data-note="C" class="key white"></div>
+        <div data-note="Db" class="key black"></div>
+        <div data-note="D" class="key white"></div>
+        <div data-note="Eb" class="key black"></div>
+        <div data-note="E" class="key white"></div>
+        <div data-note="F" class="key white"></div>
+        <div data-note="Gb" class="key black"></div>
+        <div data-note="G" class="key white"></div>
+        <div data-note="Ab" class="key black"></div>
+        <div data-note="A" class="key white"></div>
+        <div data-note="Bb" class="key black"></div>
+        <div data-note="B" class="key white"></div>
+      </div>
+
+      <audio id="C" src="./notes/C.mp3"></audio>
+      <audio id="Db" src="./notes/Db.mp3"></audio>
+      <audio id="D" src="./notes/D.mp3"></audio>
+      <audio id="Eb" src="./notes/Eb.mp3"></audio>
+      <audio id="E" src="./notes/E.mp3"></audio>
+      <audio id="F" src="./notes/F.mp3"></audio>
+      <audio id="Gb" src="./notes/Gb.mp3"></audio>
+      <audio id="G" src="./notes/G.mp3"></audio>
+      <audio id="Ab" src="./notes/Ab.mp3"></audio>
+      <audio id="A" src="./notes/A.mp3"></audio>
+      <audio id="Bb" src="./notes/Bb.mp3"></audio>
+      <audio id="B" src="./notes/B.mp3"></audio>
+    </div>
+    <script
         src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
         integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs="
         crossorigin="anonymous"
       ></script>
       <script src="app.js"></script>
-    </div>
-    <div class="lower-section"></div>
   </body>
 </html>
 

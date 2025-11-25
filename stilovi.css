@@ -11,6 +11,8 @@ body{
     overflow: hidden; /* da nema skrolovanja */
     display: flex;
     flex-direction: column;
+    margin:0;
+    padding:0;
 }
 .gornja-sekcija {
     height: 50vh;            /* gornja polovina */
@@ -48,33 +50,39 @@ h1{
 .kick-pad,
 .snare-pad,
 .hihat-pad{
-    width: 3rem;
+    width: 2.5rem;
     height: 4rem;
     margin:0.7rem 0.7rem;
     cursor:pointer;
+  
 
     
 }
 .kick-pad{
-    background-color:rgb(174, 236, 88) ;
+    background-color:transparent ;
+    border: 2px solid white;
+    
 }
 .kick-pad.active,.kick-pad:hover{
-    background-color:rgb(202, 242, 186) ;
+    background-color:rgb(170, 229, 147) ;
 
 }
 .snare-pad{
-    background-color:rgb(85, 82, 255) ;
+    background-color:transparent;
+    border: 2px solid white;
 
 }
 .snare-pad.active,.snare-pad:hover{
-    background-color:rgb(187, 186, 233) ;
+    background-color:rgb(94, 94, 223) ;
 
 }
 .hihat-pad{
-    background-color:rgb(245, 86, 86) ;
+    background-color:transparent ;
+    border: 2px solid white;
+
 }
 .hihat-pad.active,.hihat-pad:hover{
-    background-color:rgb(243, 183, 183) ;
+    background-color:rgb(238, 123, 123) ;
 
 }
 .pad{
@@ -207,4 +215,41 @@ select option{
     font-size: 1.5rem;
     color: white;
     text-align: center;
+}
+/* ---- Stil klavijature ---- */
+
+.piano {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.key {
+    height: calc(var(--width) * 4);
+    width: var(--width);
+    cursor: pointer;
+}
+
+.white {
+    --width: 70px;             /* smanjeno da stane na ekran */
+    background-color: white;
+    border: 1px solid #333;
+}
+
+.white.active {
+    background-color: #CCC;
+}
+
+.black {
+    --width: 40px;
+    background-color: black;
+    margin-left: calc(var(--width) / -2);
+    margin-right: calc(var(--width) / -2);
+    z-index: 2;
+}
+
+.black.active {
+    background-color: #333;
 }
