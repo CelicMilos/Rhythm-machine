@@ -21,7 +21,7 @@ class Drumkit {
   }
 
   repeat() {
-    let step = this.index % 12;
+    let step = this.index % 8;
     const activeBars = document.querySelectorAll(`.b${step}`);
     //ponavljanje padova
     activeBars.forEach((bar) => {
@@ -185,8 +185,8 @@ drumKit.resetBtn.addEventListener("click", () => {
 
 //Piano part
 
-const WHITE_KEYS = ["z", "x", "c", "v", "b", "n", "m"];
-const BLACK_KEYS = ["s", "d", "g", "h", "j"];
+const WHITE_KEYS = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
+const BLACK_KEYS = ["w", "e", "t", "y", "u", "o", "p"];
 
 const keys = document.querySelectorAll(".key");
 const whiteKeys = document.querySelectorAll(".key.white");
