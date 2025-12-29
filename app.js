@@ -10,6 +10,7 @@ class Drumkit {
     this.playBtn = document.querySelector(".play");
     this.index = 0;
     this.bpm = 150;
+    this.defaultBpm = 150;
     this.isplaying = null;
     this.selects = document.querySelectorAll("select");
     this.muteBtns = document.querySelectorAll(".mute");
@@ -116,7 +117,7 @@ class Drumkit {
   updateTempo() {
     clearInterval(this.isPlaying);
     this.isPlaying = null;
-    const platBtn = document.querySelector(".play");
+    const playBtn = document.querySelector(".play");
     if (this.playBtn.classList.contains("active")) {
       this.start();
     }
@@ -125,6 +126,12 @@ class Drumkit {
     // 1. Zaustavi loop
     clearInterval(this.isPlaying);
     this.isPlaying = null;
+
+    //Reset tempo
+
+    this.bpm = this.defaultBpm;
+    this.tempoSlider.value = this.defaultBpm;
+    document.querySelector(".tempo-nbr").innerText = this.defaultBpm;
 
     // 2. Reset indeks
     this.index = 0;
