@@ -4,9 +4,11 @@ class Drumkit {
     this.currenKick = "./zvukovi/kick-classic.wav";
     this.currenSnare = "./zvukovi/snare-electro.wav";
     this.currenHihat = "./zvukovi/hihat-electro.wav";
+    this.currenOpenhat = "./zvukovi/openhat-808.wav";
     this.kickAudio = document.querySelector(".kick-sound");
     this.snareAudio = document.querySelector(".snare-sound");
     this.hihatAudio = document.querySelector(".hihat-sound");
+    this.openhatAudio = document.querySelector(".openhat-sound");
     this.playBtn = document.querySelector(".play");
     this.index = 0;
     this.bpm = 150;
@@ -32,6 +34,10 @@ class Drumkit {
         if (bar.classList.contains("kick-pad")) {
           this.kickAudio.currentTime = 0;
           this.kickAudio.play();
+        }
+        if (bar.classList.contains("openhat-pad")) {
+          this.openhatAudio.currentTime = 0;
+          this.openhatAudio.play();
         }
         if (bar.classList.contains("snare-pad")) {
           this.snareAudio.currentTime = 0;
@@ -72,6 +78,9 @@ class Drumkit {
       case "kick-select":
         this.kickAudio.src = selectionValue;
         break;
+      case "openhat-select":
+        this.openhatAudio.src = selectionValue;
+        break;
       case "snare-select":
         this.snareAudio.src = selectionValue;
         break;
@@ -89,9 +98,12 @@ class Drumkit {
           this.kickAudio.volume = 0;
           break;
         case "1":
-          this.snareAudio.volume = 0;
+          this.openhatAudio.volume = 0;
           break;
         case "2":
+          this.snareAudio.volume = 0;
+          break;
+        case "3":
           this.hihatAudio.volume = 0;
           break;
       }
@@ -101,9 +113,12 @@ class Drumkit {
           this.kickAudio.volume = 1;
           break;
         case "1":
-          this.snareAudio.volume = 1;
+          this.openhatAudio.volume = 1;
           break;
         case "2":
+          this.snareAudio.volume = 1;
+          break;
+        case "3":
           this.hihatAudio.volume = 1;
           break;
       }
@@ -149,6 +164,8 @@ class Drumkit {
     // 5. Zaustavi sve zvuke
     this.kickAudio.pause();
     this.kickAudio.currentTime = 0;
+    this.openhatAudio.pause();
+    this.openhatAudio.currentTime = 0;
     this.snareAudio.pause();
     this.snareAudio.currentTime = 0;
     this.hihatAudio.pause();

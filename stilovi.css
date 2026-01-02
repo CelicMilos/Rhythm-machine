@@ -33,10 +33,11 @@ i,svg{
 }
 .sekvencer{
  display:flex;
- min-height:auto;
+ /* min-height:auto; */
  flex-direction:column;
  align-items:center;
  justify-content:center;
+ gap:1rem;
 
 }
 h1{
@@ -49,10 +50,11 @@ h1{
 }
 .kick-pad,
 .snare-pad,
-.hihat-pad{
-    width: 2.5rem;
+.hihat-pad,
+.openhat-pad{
+    width: 2rem;
     height: 4rem;
-    margin:0.7rem 0.7rem;
+    margin:0.5rem 0.7rem;
     cursor:pointer;
   
 
@@ -85,35 +87,47 @@ h1{
     background-color:rgb(238, 123, 123) ;
 
 }
+.openhat-pad{
+    background-color:transparent ;
+    border: 2px solid white;
+
+}
+.openhat-pad.active,.openhat-pad:hover{
+    background-color:rgb(253, 251, 123) ;
+
+}
+
 .pad{
     transition: all 0.2s ease;
 }
 
 .kick,
 .snare,
-.hihat{
+.hihat,
+.openhat{
     display: flex;
 }
 .kick-track,
 .snare-track,
-.hihat-track{
+.hihat-track,
+.openhat-track{
     display:flex;
-    align-items: center;
+    align-items:end;
     width:70%;
     justify-content: space-between;
-    margin-top:2rem;
+    margin-top:1rem;
 }
 .kontrole{
     display:flex;
-    justify-content:space-between;
+    /* justify-content:center; */
     align-items:center;
     flex:1;
-    margin:0rem 1rem;
+    margin:0rem 0.7rem;
 }
 select{
     display: inline-block;
     padding: 4px 3px 5px 5px;
-    width: 150px;
+    width: 200px;
     outline: none;
     color: rgb(172, 172, 172);
     border: 1px solid #C8BFC4;
@@ -138,6 +152,7 @@ select option{
      color:white;
      font-size: 1rem;
      border-radius:5px;
+     margin:0rem 1rem;
      
  }
  .mute.active{
@@ -156,7 +171,7 @@ select option{
      border-radius:10px;
      color:white;
      background-color:rgb(52, 52, 58);
-     margin-top:3rem;
+     margin-top:0.5rem;
      font-size:1.5rem;
  }
  .play:hover{
@@ -198,13 +213,13 @@ select option{
 
  }
  .tempo{
-     margin:3rem;
+     margin:0.5rem;
      width: 30%;
  }
 .tempo-slider{
     padding:0.3rem;
     appearance: none;
-    margin:1rem 0rem;
+    margin:0.5rem 0rem;
     width:100%;
     position:relative;
     background-color:rgb(125, 125, 139);

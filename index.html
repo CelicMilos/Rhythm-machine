@@ -42,10 +42,39 @@
             <div class="pad kick-pad b11"></div> -->
           </div>
         </div>
+        <div class="openhat-track">
+          <div class="kontrole">
+            <h1>Openhat</h1>
+            <button data-track="1" class="mute openhat-volume">
+              <i class="fas fa-volume-mute"></i>
+            </button>
+            <select name="openhat-select" id="openhat-select">
+              <option value="./zvukovi/openhat-808.wav">Openhat 808</option>
+              <option value="./zvukovi/openhat-acoustic01.wav">Open Acoustic</option>
+              <option value="./zvukovi/openhat-analog.wav">Openhat Analog</option>
+              <option value="./zvukovi/openhat-slick.wav">Openhat Slick</option>
+              <option value="./zvukovi/openhat-tight.wav">Openhat Tight</option>
+            </select>
+          </div>
+          <div class="openhat">
+            <div class="pad openhat-pad b0"></div>
+            <div class="pad openhat-pad b1"></div>
+            <div class="pad openhat-pad b2"></div>
+            <div class="pad openhat-pad b3"></div>
+            <div class="pad openhat-pad b4"></div>
+            <div class="pad openhat-pad b5"></div>
+            <div class="pad openhat-pad b6"></div>
+            <div class="pad openhat-pad b7"></div>
+            <!-- <div class="pad kick-pad b8"></div>
+            <div class="pad kick-pad b9"></div>
+            <div class="pad kick-pad b10"></div>
+            <div class="pad kick-pad b11"></div> -->
+          </div>
+        </div>
         <div class="snare-track">
           <div class="kontrole">
             <h1>Snare</h1>
-            <button data-track="1" class="mute snare-volume">
+            <button data-track="2" class="mute snare-volume">
               <i class="fas fa-volume-mute"></i>
             </button>
             <select name="snare-select" id="snare-select">
@@ -74,7 +103,7 @@
         <div class="hihat-track">
           <div class="kontrole">
             <h1>Hihat</h1>
-            <button data-track="2" class="mute hihat-volume">
+            <button data-track="3" class="mute hihat-volume">
               <i class="fas fa-volume-mute"></i>
             </button>
             <select name="hihat-select" id="hihat-select">
@@ -119,6 +148,7 @@
       <audio class="kick-sound" src="./zvukovi/kick-classic.wav"></audio>
       <audio class="hihat-sound" src="./zvukovi/hihat-electro.wav"></audio>
       <audio class="snare-sound" src="./zvukovi/snare-electro.wav"></audio>
+      <audio class="openhat-sound" src="./zvukovi/openhat-808.wav"></audio>
     </div>
     <div class="lower-section">
       <div class="piano">
@@ -143,16 +173,16 @@
 
       <audio id="C" src="./notes/C.wav"></audio>
       <audio id="Db" src="./notes/Db.wav"></audio>
-      <audio id="D" src="./notes/D.mp3"></audio>
-      <audio id="Eb" src="./notes/Eb.mp3"></audio>
-      <audio id="E" src="./notes/E.mp3"></audio>
-      <audio id="F" src="./notes/F.mp3"></audio>
-      <audio id="Gb" src="./notes/Gb.mp3"></audio>
-      <audio id="G" src="./notes/G.mp3"></audio>
+      <audio id="D" src="./notes/D.wav"></audio>
+      <audio id="Eb" src="./notes/Eb.wav"></audio>
+      <audio id="E" src="./notes/E.wav"></audio>
+      <audio id="F" src="./notes/F.wav"></audio>
+      <audio id="Gb" src="./notes/Gb.wav"></audio>
+      <audio id="G" src="./notes/G.wav"></audio>
       <audio id="Ab" src="./notes/Ab.mp3"></audio>
-      <audio id="A" src="./notes/A.mp3"></audio>
-      <audio id="Bb" src="./notes/Bb.mp3"></audio>
-      <audio id="B" src="./notes/B.mp3"></audio>
+      <audio id="A" src="./notes/A.wav"></audio>
+      <audio id="Bb" src="./notes/Bb.wav"></audio>
+      <audio id="B" src="./notes/B.wav"></audio>
     </div>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
