@@ -9,6 +9,9 @@ class Drumkit {
     this.snareAudio = document.querySelector(".snare-sound");
     this.hihatAudio = document.querySelector(".hihat-sound");
     this.openhatAudio = document.querySelector(".openhat-sound");
+    this.clapAudio = document.querySelector(".clap-sound");
+    this.crashAudio = document.querySelector(".crash-sound");
+    this.cowbellAudio = document.querySelector(".cowbell-sound");
     this.playBtn = document.querySelector(".play");
     this.index = 0;
     this.bpm = 150;
@@ -46,6 +49,18 @@ class Drumkit {
         if (bar.classList.contains("hihat-pad")) {
           this.hihatAudio.currentTime = 0;
           this.hihatAudio.play();
+        }
+        if (bar.classList.contains("clap-pad")) {
+          this.clapAudio.currentTime = 0;
+          this.clapAudio.play();
+        }
+        if (bar.classList.contains("crash-pad")) {
+          this.crashAudio.currentTime = 0;
+          this.crashAudio.play();
+        }
+        if (bar.classList.contains("cowbell-pad")) {
+          this.cowbellAudio.currentTime = 0;
+          this.cowbellAudio.play();
         }
       }
     });
@@ -87,6 +102,15 @@ class Drumkit {
       case "hihat-select":
         this.hihatAudio.src = selectionValue;
         break;
+      case "clap-select":
+        this.clapAudio.src = selectionValue;
+        break;
+      case "crash-select":
+        this.crashAudio.src = selectionValue;
+        break;
+      case "cowbell-select":
+        this.cowbellAudio.src = selectionValue;
+        break;
     }
   }
   mute(e) {
@@ -106,6 +130,15 @@ class Drumkit {
         case "3":
           this.hihatAudio.volume = 0;
           break;
+        case "4":
+          this.clapAudio.volume = 0;
+          break;
+        case "5":
+          this.crashAudio.volume = 0;
+          break;
+        case "6":
+          this.cowbellAudio.volume = 0;
+          break;
       }
     } else {
       switch (muteIndex) {
@@ -120,6 +153,15 @@ class Drumkit {
           break;
         case "3":
           this.hihatAudio.volume = 1;
+          break;
+        case "4":
+          this.clapAudio.volume = 1;
+          break;
+        case "5":
+          this.crashAudio.volume = 1;
+          break;
+        case "6":
+          this.cowbellAudio.volume = 1;
           break;
       }
     }
@@ -170,6 +212,12 @@ class Drumkit {
     this.snareAudio.currentTime = 0;
     this.hihatAudio.pause();
     this.hihatAudio.currentTime = 0;
+    this.clapAudio.pause();
+    this.clapAudio.currentTime = 0;
+    this.crashAudio.pause();
+    this.crashAudio.currentTime = 0;
+    this.cowbellAudio.pause();
+    this.cowbellAudio.currentTime = 0;
   }
 }
 const drumKit = new Drumkit();
