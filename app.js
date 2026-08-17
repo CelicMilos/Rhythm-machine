@@ -4,12 +4,15 @@ class Drumkit {
     this.currenKick = "./zvukovi/kick-classic.wav";
     this.currenSnare = "./zvukovi/snare-electro.wav";
     this.currenHihat = "./zvukovi/hihat-electro.wav";
+    this.currenOpenhat = "./zvukovi/openhat-808.wav";
     this.kickAudio = document.querySelector(".kick-sound");
     this.snareAudio = document.querySelector(".snare-sound");
     this.hihatAudio = document.querySelector(".hihat-sound");
+    this.openhatAudio = document.querySelector(".openhat-sound");
     this.playBtn = document.querySelector(".play");
     this.index = 0;
     this.bpm = 150;
+    this.defaultBpm = 150;
     this.isplaying = null;
     this.selects = document.querySelectorAll("select");
     this.muteBtns = document.querySelectorAll(".mute");
@@ -21,7 +24,7 @@ class Drumkit {
   }
 
   repeat() {
-    let step = this.index % 12;
+    let step = this.index % 8;
     const activeBars = document.querySelectorAll(`.b${step}`);
     //ponavljanje padova
     activeBars.forEach((bar) => {
@@ -31,6 +34,10 @@ class Drumkit {
         if (bar.classList.contains("kick-pad")) {
           this.kickAudio.currentTime = 0;
           this.kickAudio.play();
+        }
+        if (bar.classList.contains("openhat-pad")) {
+          this.openhatAudio.currentTime = 0;
+          this.openhatAudio.play();
         }
         if (bar.classList.contains("snare-pad")) {
           this.snareAudio.currentTime = 0;
@@ -71,6 +78,9 @@ class Drumkit {
       case "kick-select":
         this.kickAudio.src = selectionValue;
         break;
+      case "openhat-select":
+        this.openhatAudio.src = selectionValue;
+        break;
       case "snare-select":
         this.snareAudio.src = selectionValue;
         break;
@@ -88,9 +98,12 @@ class Drumkit {
           this.kickAudio.volume = 0;
           break;
         case "1":
-          this.snareAudio.volume = 0;
+          this.openhatAudio.volume = 0;
           break;
         case "2":
+          this.snareAudio.volume = 0;
+          break;
+        case "3":
           this.hihatAudio.volume = 0;
           break;
       }
@@ -100,9 +113,12 @@ class Drumkit {
           this.kickAudio.volume = 1;
           break;
         case "1":
-          this.snareAudio.volume = 1;
+          this.openhatAudio.volume = 1;
           break;
         case "2":
+          this.snareAudio.volume = 1;
+          break;
+        case "3":
           this.hihatAudio.volume = 1;
           break;
       }
@@ -116,7 +132,7 @@ class Drumkit {
   updateTempo() {
     clearInterval(this.isPlaying);
     this.isPlaying = null;
-    const platBtn = document.querySelector(".play");
+    const playBtn = document.querySelector(".play");
     if (this.playBtn.classList.contains("active")) {
       this.start();
     }
@@ -125,6 +141,12 @@ class Drumkit {
     // 1. Zaustavi loop
     clearInterval(this.isPlaying);
     this.isPlaying = null;
+
+    //Reset tempo
+
+    this.bpm = this.defaultBpm;
+    this.tempoSlider.value = this.defaultBpm;
+    document.querySelector(".tempo-nbr").innerText = this.defaultBpm;
 
     // 2. Reset indeks
     this.index = 0;
@@ -142,6 +164,8 @@ class Drumkit {
     // 5. Zaustavi sve zvuke
     this.kickAudio.pause();
     this.kickAudio.currentTime = 0;
+    this.openhatAudio.pause();
+    this.openhatAudio.currentTime = 0;
     this.snareAudio.pause();
     this.snareAudio.currentTime = 0;
     this.hihatAudio.pause();
@@ -182,3 +206,36 @@ drumKit.tempoSlider.addEventListener("change", function (e) {
 drumKit.resetBtn.addEventListener("click", () => {
   drumKit.reset();
 });
+
+//Piano part
+
+const WHITE_KEYS = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
+const BLACK_KEYS = ["w", "e", "t", "y", "u", "o", "p"];
+
+const keys = document.querySelectorAll(".key");
+const whiteKeys = document.querySelectorAll(".key.white");
+const blackKeys = document.querySelectorAll(".key.black");
+
+keys.forEach((key) => {
+  key.addEventListener("click", () => playNote(key));
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.repeat) return;
+  const key = e.key;
+  const whiteKeyIndex = WHITE_KEYS.indexOf(key);
+  const blackKeyIndex = BLACK_KEYS.indexOf(key);
+
+  if (whiteKeyIndex > -1) playNote(whiteKeys[whiteKeyIndex]);
+  if (blackKeyIndex > -1) playNote(blackKeys[blackKeyIndex]);
+});
+
+function playNote(key) {
+  const noteAudio = document.getElementById(key.dataset.note);
+  noteAudio.currentTime = 0;
+  noteAudio.play();
+  key.classList.add("active");
+  noteAudio.addEventListener("ended", () => {
+    key.classList.remove("active");
+  });
+}

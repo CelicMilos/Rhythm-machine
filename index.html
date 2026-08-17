@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,12 +18,13 @@
             </button>
             <select name="kick-select" id="kick-select">
               <option value="./zvukovi/kick-808.wav">Kick 808</option>
-              <option value="./zvukovi/kick-acoustic01.wav">
-                Kick Acoustic
-              </option>
+              <option value="./zvukovi/kick-acoustic01.wav">Kick Acoustic</option>
               <option value="./zvukovi/kick-classic.wav">Kick Classic</option>
               <option value="./zvukovi/kick-big.wav">Kick Big</option>
               <option value="./zvukovi/kick-deep.wav">Kick Deep</option>
+              <option value="./zvukovi/kick-dry.wav">Kick Dry</option>
+              <option value="./zvukovi/kick-floppy.wav">Kick Floppy</option>
+              <option value="./zvukovi/kick-gritty.wav">Kick Gritty</option>
             </select>
           </div>
           <div class="kick">
@@ -34,23 +36,50 @@
             <div class="pad kick-pad b5"></div>
             <div class="pad kick-pad b6"></div>
             <div class="pad kick-pad b7"></div>
-            <div class="pad kick-pad b8"></div>
+            <!-- <div class="pad kick-pad b8"></div>
             <div class="pad kick-pad b9"></div>
             <div class="pad kick-pad b10"></div>
-            <div class="pad kick-pad b11"></div>
+            <div class="pad kick-pad b11"></div> -->
+          </div>
+        </div>
+        <div class="openhat-track">
+          <div class="kontrole">
+            <h1>Openhat</h1>
+            <button data-track="1" class="mute openhat-volume">
+              <i class="fas fa-volume-mute"></i>
+            </button>
+            <select name="openhat-select" id="openhat-select">
+              <option value="./zvukovi/openhat-808.wav">Openhat 808</option>
+              <option value="./zvukovi/openhat-acoustic01.wav">Open Acoustic</option>
+              <option value="./zvukovi/openhat-analog.wav">Openhat Analog</option>
+              <option value="./zvukovi/openhat-slick.wav">Openhat Slick</option>
+              <option value="./zvukovi/openhat-tight.wav">Openhat Tight</option>
+            </select>
+          </div>
+          <div class="openhat">
+            <div class="pad openhat-pad b0"></div>
+            <div class="pad openhat-pad b1"></div>
+            <div class="pad openhat-pad b2"></div>
+            <div class="pad openhat-pad b3"></div>
+            <div class="pad openhat-pad b4"></div>
+            <div class="pad openhat-pad b5"></div>
+            <div class="pad openhat-pad b6"></div>
+            <div class="pad openhat-pad b7"></div>
+            <!-- <div class="pad kick-pad b8"></div>
+            <div class="pad kick-pad b9"></div>
+            <div class="pad kick-pad b10"></div>
+            <div class="pad kick-pad b11"></div> -->
           </div>
         </div>
         <div class="snare-track">
           <div class="kontrole">
             <h1>Snare</h1>
-            <button data-track="1" class="mute snare-volume">
+            <button data-track="2" class="mute snare-volume">
               <i class="fas fa-volume-mute"></i>
             </button>
             <select name="snare-select" id="snare-select">
               <option value="./zvukovi/snare-808.wav">Snare 808</option>
-              <option value="./zvukovi/snare-acoustic01.wav">
-                Snare Acoustic
-              </option>
+              <option value="./zvukovi/snare-acoustic01.wav">Snare Acoustic</option>
               <option value="./zvukovi/snare-big.wav">Snare</option>
               <option value="./zvukovi/snare-electro.wav">Snare Electro</option>
               <option value="./zvukovi/snare-lofi01.wav">Snare LoFi</option>
@@ -65,23 +94,21 @@
             <div class="pad snare-pad b5"></div>
             <div class="pad snare-pad b6"></div>
             <div class="pad snare-pad b7"></div>
-            <div class="pad snare-pad b8"></div>
+            <!-- <div class="pad snare-pad b8"></div>
             <div class="pad snare-pad b9"></div>
             <div class="pad snare-pad b10"></div>
-            <div class="pad snare-pad b11"></div>
+            <div class="pad snare-pad b11"></div> -->
           </div>
         </div>
         <div class="hihat-track">
           <div class="kontrole">
             <h1>Hihat</h1>
-            <button data-track="2" class="mute hihat-volume">
+            <button data-track="3" class="mute hihat-volume">
               <i class="fas fa-volume-mute"></i>
             </button>
             <select name="hihat-select" id="hihat-select">
               <option value="./zvukovi/hihat-808.wav">Hihat 808</option>
-              <option value="./zvukovi/hihat-acoustic01.wav">
-                Hihat Acoustic
-              </option>
+              <option value="./zvukovi/hihat-acoustic01.wav">Hihat Acoustic</option>
               <option value="./zvukovi/hihat-analog.wav">Hihat Analog</option>
               <option value="./zvukovi/hihat-digital.wav">Hihat Digital</option>
               <option value="./zvukovi/hihat-electro.wav">Hihat Electro</option>
@@ -96,10 +123,10 @@
             <div class="pad hihat-pad b5"></div>
             <div class="pad hihat-pad b6"></div>
             <div class="pad hihat-pad b7"></div>
-            <div class="pad hihat-pad b8"></div>
+            <!-- <div class="pad hihat-pad b8"></div>
             <div class="pad hihat-pad b9"></div>
             <div class="pad hihat-pad b10"></div>
-            <div class="pad hihat-pad b11"></div>
+            <div class="pad hihat-pad b11"></div> -->
           </div>
         </div>
         <div class="controles">
@@ -118,17 +145,51 @@
         </div>
       </div>
       </div>
-
       <audio class="kick-sound" src="./zvukovi/kick-classic.wav"></audio>
       <audio class="hihat-sound" src="./zvukovi/hihat-electro.wav"></audio>
       <audio class="snare-sound" src="./zvukovi/snare-electro.wav"></audio>
-      <script
+      <audio class="openhat-sound" src="./zvukovi/openhat-808.wav"></audio>
+    </div>
+    <div class="lower-section">
+      <div class="piano">
+        <div data-note="C" class="key white"></div>
+        <div data-note="Db" class="key black"></div>
+        <div data-note="D" class="key white"></div>
+        <div data-note="Eb" class="key black"></div>
+        <div data-note="E" class="key white"></div>
+        <div data-note="F" class="key white"></div>
+        <div data-note="Gb" class="key black"></div>
+        <div data-note="G" class="key white"></div>
+        <div data-note="Ab" class="key black"></div>
+        <div data-note="A" class="key white"></div>
+        <div data-note="Bb" class="key black"></div>
+        <div data-note="B" class="key white"></div>
+        <div data-note="C" class="key white"></div>
+        <div data-note="Db" class="key black"></div>
+        <div data-note="D" class="key white"></div>
+        <div data-note="Eb" class="key black"></div>
+        <div data-note="E" class="key white"></div>
+      </div>
+
+      <audio id="C" src="./notes/C.wav"></audio>
+      <audio id="Db" src="./notes/Db.wav"></audio>
+      <audio id="D" src="./notes/D.wav"></audio>
+      <audio id="Eb" src="./notes/Eb.wav"></audio>
+      <audio id="E" src="./notes/E.wav"></audio>
+      <audio id="F" src="./notes/F.wav"></audio>
+      <audio id="Gb" src="./notes/Gb.wav"></audio>
+      <audio id="G" src="./notes/G.wav"></audio>
+      <audio id="Ab" src="./notes/Ab.mp3"></audio>
+      <audio id="A" src="./notes/A.wav"></audio>
+      <audio id="Bb" src="./notes/Bb.wav"></audio>
+      <audio id="B" src="./notes/B.wav"></audio>
+    </div>
+    <script
         src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
         integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs="
         crossorigin="anonymous"
       ></script>
       <script src="app.js"></script>
-    </div>
-    <div class="lower-section"></div>
   </body>
 </html>
+
