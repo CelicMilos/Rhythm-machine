@@ -287,3 +287,18 @@ function playNote(key) {
     key.classList.remove("active");
   });
 }
+
+const noteAudios = document.querySelectorAll(".lower-section audio");
+const volumeSlider = document.querySelector(".volume-slider");
+const volumeText = document.querySelector(".volume-nbr");
+
+noteAudios.forEach((audio) => {
+  audio.volume = volumeSlider.value / 100;
+});
+
+volumeSlider.addEventListener("input", (e) => {
+  noteAudios.forEach((audio) => {
+    audio.volume = e.target.value / 100;
+  });
+  volumeText.innerText = e.target.value;
+});

@@ -18,7 +18,7 @@ body{
     padding:0;
 }
 .upper-section {
-    flex: 2 1 0;
+    flex: 1 1 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,12 +28,15 @@ body{
 .lower-section {
     flex: 1 1 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 0.3rem;
     width: 100%;
-    padding-top: 0.75rem;
+    padding-top: 0.5rem;
     border-top: 2px solid rgba(255,255,255,0.1);
     min-height: 0;
+    --key-width: 62px;
 }
 i,svg{
     pointer-events: none;
@@ -43,18 +46,18 @@ i,svg{
  flex-direction:column;
  align-items:center;
  justify-content:center;
- gap:0.3rem;
+ gap:0.25rem;
  width:100%;
- max-width:1100px;
+ max-width:1000px;
 
 }
 h1{
     color:rgb(207, 207, 207);
     font-family:Arial, Helvetica, sans-serif;
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     font-weight: 500;
     margin:0;
-    width: 6.5rem;
+    width: 5.5rem;
 }
 .kick-pad,
 .snare-pad,
@@ -64,7 +67,7 @@ h1{
 .crash-pad,
 .cowbell-pad{
     width: 100%;
-    height: 2.1rem;
+    height: 1.7rem;
     cursor:pointer;
 }
 .kick-pad{
@@ -155,29 +158,29 @@ h1{
 .crash-track,
 .cowbell-track{
     display:grid;
-    grid-template-columns: 380px 1fr;
+    grid-template-columns: 340px 1fr;
     align-items:center;
-    gap:1.5rem;
+    gap:1.2rem;
     width:100%;
-    background: rgba(255,255,255,0.035);
-    border-radius: 10px;
-    padding: 0.2rem 1.5rem;
+    background: rgba(255, 255, 255, 0.035);
+    border-radius: 8px;
+    padding: 0.15rem 1.2rem;
 }
 .kontrole{
     display:flex;
     align-items:center;
-    gap:0.6rem;
+    gap:0.5rem;
 }
 select{
     display: inline-block;
-    padding: 4px 3px 5px 5px;
-    width: 200px;
+    padding: 2px 3px 3px 5px;
+    width: 170px;
     outline: none;
     color: rgb(172, 172, 172);
     border: 1px solid #C8BFC4;
     border-radius: 4px;
     box-shadow: inset 1px 1px 2px #ddd8dc;
-    background-color: rgba(70, 72, 80, 0.844);
+    background-color: rgba(4, 4, 4, 0.844);
     font-size: 1rem;
     font-weight: 600;
 }
@@ -190,14 +193,14 @@ select option{
     background-color:rgba(118, 141, 49, 0.2);
  }
  .mute{
-     width:3rem;
-     height:2rem;
+     width:2.4rem;
+     height:1.6rem;
      background-color: rgb(43, 43, 54);
      color:white;
-     font-size: 1rem;
+     font-size: 0.85rem;
      border-radius:5px;
-     margin:0rem 1rem;
-     
+     margin:0;
+
  }
  .mute.active{
     background: rgb(160, 159, 159);
@@ -206,17 +209,16 @@ select option{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;       /* razmak između dugmadi */
-    margin-top: 0.5rem;
+    gap: 1.2rem;       /* razmak između dugmadi */
+    margin-top: 0.3rem;
 }
  .play{
-     width:10rem;
-     height:3rem;
+     width:8rem;
+     height:2.4rem;
      border-radius:10px;
      color:white;
      background-color:rgb(52, 52, 58);
-     margin-top:0.5rem;
-     font-size:1.5rem;
+     font-size:1.2rem;
  }
  .play:hover{
     background-color:rgb(103, 103, 116);
@@ -227,15 +229,14 @@ select option{
 
  }
  .reset {
-    width: 10rem;
-    height: 3rem;
+    width: 8rem;
+    height: 2.4rem;
     border-radius: 10px;
     color: white;
     background-color: rgb(52, 52, 58);
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     cursor: pointer;
     transition: background 0.2s ease;
-    margin:0rem 1rem
 }
 
 .reset:hover {
@@ -257,13 +258,18 @@ select option{
 
  }
  .tempo{
-     margin:0.5rem;
+     margin:0.15rem;
      width: 30%;
  }
-.tempo-slider{
-    padding:0.3rem;
+ .volume{
+     margin:0.15rem;
+     width: calc(var(--key-width) * 10 * 0.5); /* 50% od sirine klavijature (10 belih dirki) */
+ }
+.tempo-slider,
+.volume-slider{
+    padding:0.2rem;
     appearance: none;
-    margin:0.5rem 0rem;
+    margin:0.3rem 0rem;
     width:100%;
     position:relative;
     background-color:rgb(125, 125, 139);
@@ -273,8 +279,9 @@ select option{
     transition:background 0.2s ease;
 
 }
-.tempo p{
-    font-size: 1.5rem;
+.tempo p,
+.volume p{
+    font-size: 1.2rem;
     color: white;
     text-align: center;
 }
@@ -295,7 +302,7 @@ select option{
 }
 
 .white {
-    --width: 54px;             /* smanjeno da stane na ekran */
+    --width: var(--key-width);
     background-color: white;
     border: 1px solid #333;
 }
@@ -305,7 +312,7 @@ select option{
 }
 
 .black {
-    --width: 40px;
+    --width: 44px;
     background-color: black;
     margin-left: calc(var(--width) / -2);
     margin-right: calc(var(--width) / -2);
