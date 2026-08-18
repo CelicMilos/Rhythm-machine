@@ -224,24 +224,36 @@
       <audio class="cowbell-sound" src="./zvukovi/cowbell-808.wav"></audio>
     </div>
     <div class="lower-section">
-      <div class="piano">
-        <div data-note="C" class="key white"></div>
-        <div data-note="Db" class="key black"></div>
-        <div data-note="D" class="key white"></div>
-        <div data-note="Eb" class="key black"></div>
-        <div data-note="E" class="key white"></div>
-        <div data-note="F" class="key white"></div>
-        <div data-note="Gb" class="key black"></div>
-        <div data-note="G" class="key white"></div>
-        <div data-note="Ab" class="key black"></div>
-        <div data-note="A" class="key white"></div>
-        <div data-note="Bb" class="key black"></div>
-        <div data-note="B" class="key white"></div>
-        <div data-note="C" class="key white"></div>
-        <div data-note="Db" class="key black"></div>
-        <div data-note="D" class="key white"></div>
-        <div data-note="Eb" class="key black"></div>
-        <div data-note="E" class="key white"></div>
+      <div class="piano-track">
+        <div class="kontrole piano-kontrole">
+          <h1>Instrument</h1>
+          <select name="instrument-select" id="instrument-select">
+            <option value="piano">Piano</option>
+            <option value="sine">Synth</option>
+            <option value="square">Chiptune</option>
+            <option value="sawtooth">Lead</option>
+            <option value="triangle">Pad</option>
+          </select>
+        </div>
+        <div class="piano">
+          <div data-note="C" class="key white"></div>
+          <div data-note="Db" class="key black"></div>
+          <div data-note="D" class="key white"></div>
+          <div data-note="Eb" class="key black"></div>
+          <div data-note="E" class="key white"></div>
+          <div data-note="F" class="key white"></div>
+          <div data-note="Gb" class="key black"></div>
+          <div data-note="G" class="key white"></div>
+          <div data-note="Ab" class="key black"></div>
+          <div data-note="A" class="key white"></div>
+          <div data-note="Bb" class="key black"></div>
+          <div data-note="B" class="key white"></div>
+          <div data-note="C" class="key white"></div>
+          <div data-note="Db" class="key black"></div>
+          <div data-note="D" class="key white"></div>
+          <div data-note="Eb" class="key black"></div>
+          <div data-note="E" class="key white"></div>
+        </div>
       </div>
       <div class="volume">
         <input

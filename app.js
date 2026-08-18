@@ -260,9 +260,27 @@ drumKit.resetBtn.addEventListener("click", () => {
 const WHITE_KEYS = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
 const BLACK_KEYS = ["w", "e", "t", "y", "u", "o", "p"];
 
+const NOTE_FREQUENCIES = {
+  C: 261.63,
+  Db: 277.18,
+  D: 293.66,
+  Eb: 311.13,
+  E: 329.63,
+  F: 349.23,
+  Gb: 369.99,
+  G: 392.0,
+  Ab: 415.3,
+  A: 440.0,
+  Bb: 466.16,
+  B: 493.88,
+};
+
 const keys = document.querySelectorAll(".key");
 const whiteKeys = document.querySelectorAll(".key.white");
 const blackKeys = document.querySelectorAll(".key.black");
+const instrumentSelect = document.getElementById("instrument-select");
+
+let audioCtx = null;
 
 keys.forEach((key) => {
   key.addEventListener("click", () => playNote(key));
@@ -279,13 +297,44 @@ document.addEventListener("keydown", (e) => {
 });
 
 function playNote(key) {
-  const noteAudio = document.getElementById(key.dataset.note);
-  noteAudio.currentTime = 0;
-  noteAudio.play();
   key.classList.add("active");
-  noteAudio.addEventListener("ended", () => {
-    key.classList.remove("active");
-  });
+  if (instrumentSelect.value === "piano") {
+    const noteAudio = document.getElementById(key.dataset.note);
+    noteAudio.currentTime = 0;
+    noteAudio.play();
+    noteAudio.addEventListener("ended", () => {
+      key.classList.remove("active");
+    });
+  } else {
+    const oscillator = playSynthNote(key.dataset.note, instrumentSelect.value);
+    oscillator.addEventListener("ended", () => {
+      key.classList.remove("active");
+    });
+  }
+}
+
+function playSynthNote(note, waveform) {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  const now = audioCtx.currentTime;
+  const peakGain = 0.3 * (volumeSlider.value / 100);
+
+  const oscillator = audioCtx.createOscillator();
+  oscillator.type = waveform;
+  oscillator.frequency.value = NOTE_FREQUENCIES[note];
+
+  const gainNode = audioCtx.createGain();
+  gainNode.gain.setValueAtTime(0, now);
+  gainNode.gain.linearRampToValueAtTime(peakGain, now + 0.02);
+  gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.6);
+
+  oscillator.connect(gainNode);
+  gainNode.connect(audioCtx.destination);
+  oscillator.start(now);
+  oscillator.stop(now + 0.6);
+
+  return oscillator;
 }
 
 const noteAudios = document.querySelectorAll(".lower-section audio");

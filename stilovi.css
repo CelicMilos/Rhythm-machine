@@ -287,12 +287,26 @@ select option{
 }
 /* ---- Stil klavijature ---- */
 
+.piano-track {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    background: rgba(255, 255, 255, 0.035);
+    border-radius: 8px;
+    padding: 0.3rem 1.2rem;
+}
+
+.piano-kontrole h1 {
+    width: auto;
+    white-space: nowrap;
+}
+
 .piano {
     display: flex;
     position: relative;
     justify-content: center;
     /* align-items: center; */
-    
+
 }
 
 .key {
