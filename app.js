@@ -306,14 +306,15 @@ function playNote(key) {
       key.classList.remove("active");
     });
   } else {
-    const oscillator = playSynthNote(key.dataset.note, instrumentSelect.value);
+    const octave = parseInt(key.dataset.octave || "0", 10);
+    const oscillator = playSynthNote(key.dataset.note, instrumentSelect.value, octave);
     oscillator.addEventListener("ended", () => {
       key.classList.remove("active");
     });
   }
 }
 
-function playSynthNote(note, waveform) {
+function playSynthNote(note, waveform, octave = 0) {
   if (!audioCtx) {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   }
@@ -322,7 +323,7 @@ function playSynthNote(note, waveform) {
 
   const oscillator = audioCtx.createOscillator();
   oscillator.type = waveform;
-  oscillator.frequency.value = NOTE_FREQUENCIES[note];
+  oscillator.frequency.value = NOTE_FREQUENCIES[note] * Math.pow(2, octave);
 
   const gainNode = audioCtx.createGain();
   gainNode.gain.setValueAtTime(0, now);
