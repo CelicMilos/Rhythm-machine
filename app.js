@@ -221,6 +221,8 @@ class Drumkit {
   }
 }
 const drumKit = new Drumkit();
+drumKit.tempoSlider.value = drumKit.defaultBpm;
+document.querySelector(".tempo-nbr").innerText = drumKit.defaultBpm;
 drumKit.pads.forEach((pad) => {
   pad.addEventListener("click", drumKit.activePad);
   pad.addEventListener("animationend", function () {
@@ -255,9 +257,9 @@ drumKit.resetBtn.addEventListener("click", () => {
   drumKit.reset();
 });
 
-//Piano part
+//*************     PIANO PART     ************
 
-const WHITE_KEYS = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
+const WHITE_KEYS = ["a", "s", "d", "f", "g", "h", "j", "k", "l", ";"];
 const BLACK_KEYS = ["w", "e", "t", "y", "u", "o", "p"];
 
 const NOTE_FREQUENCIES = {
@@ -307,7 +309,11 @@ function playNote(key) {
     });
   } else {
     const octave = parseInt(key.dataset.octave || "0", 10);
-    const oscillator = playSynthNote(key.dataset.note, instrumentSelect.value, octave);
+    const oscillator = playSynthNote(
+      key.dataset.note,
+      instrumentSelect.value,
+      octave,
+    );
     oscillator.addEventListener("ended", () => {
       key.classList.remove("active");
     });
@@ -341,9 +347,12 @@ function playSynthNote(note, waveform, octave = 0) {
 const noteAudios = document.querySelectorAll(".lower-section audio");
 const volumeSlider = document.querySelector(".volume-slider");
 const volumeText = document.querySelector(".volume-nbr");
+const DEFAULT_VOLUME = 50;
 
+volumeSlider.value = DEFAULT_VOLUME;
+volumeText.innerText = DEFAULT_VOLUME;
 noteAudios.forEach((audio) => {
-  audio.volume = volumeSlider.value / 100;
+  audio.volume = DEFAULT_VOLUME / 100;
 });
 
 volumeSlider.addEventListener("input", (e) => {
