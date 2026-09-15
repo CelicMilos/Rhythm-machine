@@ -376,3 +376,71 @@ volumeSlider.addEventListener("input", (e) => {
   });
   volumeText.innerText = e.target.value;
 });
+
+//*************     VOLUME KNOB     ************
+
+const volumeKnob = document.getElementById("volume-knob");
+const KNOB_MIN_ANGLE = -135;
+const KNOB_MAX_ANGLE = 135;
+
+function valueToAngle(value) {
+  const min = Number(volumeSlider.min);
+  const max = Number(volumeSlider.max);
+  return KNOB_MIN_ANGLE + ((value - min) / (max - min)) * (KNOB_MAX_ANGLE - KNOB_MIN_ANGLE);
+}
+
+function setKnobValue(value) {
+  value = Math.min(100, Math.max(0, Math.round(value)));
+  if (Number(volumeSlider.value) === value) return;
+  volumeSlider.value = value;
+  volumeKnob.style.transform = `rotate(${valueToAngle(value)}deg)`;
+  volumeKnob.setAttribute("aria-valuenow", value);
+  volumeSlider.dispatchEvent(new Event("input", { bubbles: true }));
+}
+
+volumeKnob.style.transform = `rotate(${valueToAngle(volumeSlider.value)}deg)`;
+volumeKnob.setAttribute("aria-valuenow", volumeSlider.value);
+
+let knobDragging = false;
+let knobStartY = 0;
+let knobStartValue = 0;
+
+volumeKnob.addEventListener("pointerdown", (e) => {
+  knobDragging = true;
+  knobStartY = e.clientY;
+  knobStartValue = Number(volumeSlider.value);
+  volumeKnob.setPointerCapture(e.pointerId);
+});
+
+volumeKnob.addEventListener("pointermove", (e) => {
+  if (!knobDragging) return;
+  const deltaValue = (knobStartY - e.clientY) * 0.5;
+  setKnobValue(knobStartValue + deltaValue);
+});
+
+volumeKnob.addEventListener("pointerup", () => {
+  knobDragging = false;
+});
+volumeKnob.addEventListener("pointercancel", () => {
+  knobDragging = false;
+});
+
+volumeKnob.addEventListener(
+  "wheel",
+  (e) => {
+    e.preventDefault();
+    const direction = e.deltaY > 0 ? -1 : 1;
+    setKnobValue(Number(volumeSlider.value) + direction * 2);
+  },
+  { passive: false },
+);
+
+volumeKnob.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowUp" || e.key === "ArrowRight") {
+    e.preventDefault();
+    setKnobValue(Number(volumeSlider.value) + 2);
+  } else if (e.key === "ArrowDown" || e.key === "ArrowLeft") {
+    e.preventDefault();
+    setKnobValue(Number(volumeSlider.value) - 2);
+  }
+});

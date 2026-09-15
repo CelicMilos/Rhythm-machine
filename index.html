@@ -258,6 +258,21 @@
         </div>
       </div>
       <div class="volume">
+        <div class="knob-wrapper">
+          <div class="knob-ticks"></div>
+          <div
+            class="knob"
+            id="volume-knob"
+            tabindex="0"
+            role="slider"
+            aria-label="Volume"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="50"
+          >
+            <div class="knob-indicator"></div>
+          </div>
+        </div>
         <input
         type="range"
         class="volume-slider"
@@ -265,6 +280,7 @@
         min="0"
         value="50"
         autocomplete="off"
+        hidden
         />
         <p>Volume: <span class="volume-nbr">50</span></p>
       </div>
