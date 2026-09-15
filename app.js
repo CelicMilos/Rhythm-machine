@@ -283,6 +283,17 @@ const blackKeys = document.querySelectorAll(".key.black");
 const instrumentSelect = document.getElementById("instrument-select");
 
 let audioCtx = null;
+let saxWave = null;
+
+function getSaxWave() {
+  if (!saxWave) {
+    const amps = [0, 1, 0.55, 0.65, 0.3, 0.4, 0.2, 0.25, 0.12, 0.15, 0.08, 0.1];
+    const real = new Float32Array(amps.length);
+    const imag = new Float32Array(amps);
+    saxWave = audioCtx.createPeriodicWave(real, imag);
+  }
+  return saxWave;
+}
 
 keys.forEach((key) => {
   key.addEventListener("click", () => playNote(key));
@@ -328,7 +339,11 @@ function playSynthNote(note, waveform, octave = 0) {
   const peakGain = 0.3 * (volumeSlider.value / 100);
 
   const oscillator = audioCtx.createOscillator();
-  oscillator.type = waveform;
+  if (waveform === "saxophone") {
+    oscillator.setPeriodicWave(getSaxWave());
+  } else {
+    oscillator.type = waveform;
+  }
   oscillator.frequency.value = NOTE_FREQUENCIES[note] * Math.pow(2, octave);
 
   const gainNode = audioCtx.createGain();
