@@ -21,6 +21,16 @@ class Drumkit {
     this.muteBtns = document.querySelectorAll(".mute");
     this.tempoSlider = document.querySelector(".tempo-slider");
     this.resetBtn = document.querySelector(".reset");
+    this.seqVolume = 1;
+    this.audioByTrack = {
+      0: this.kickAudio,
+      1: this.openhatAudio,
+      2: this.snareAudio,
+      3: this.hihatAudio,
+      4: this.clapAudio,
+      5: this.crashAudio,
+      6: this.cowbellAudio,
+    };
   }
   activePad() {
     this.classList.toggle("active");
@@ -116,55 +126,17 @@ class Drumkit {
   mute(e) {
     const muteIndex = e.target.getAttribute("data-track");
     e.target.classList.toggle("active");
-    if (e.target.classList.contains("active")) {
-      switch (muteIndex) {
-        case "0":
-          this.kickAudio.volume = 0;
-          break;
-        case "1":
-          this.openhatAudio.volume = 0;
-          break;
-        case "2":
-          this.snareAudio.volume = 0;
-          break;
-        case "3":
-          this.hihatAudio.volume = 0;
-          break;
-        case "4":
-          this.clapAudio.volume = 0;
-          break;
-        case "5":
-          this.crashAudio.volume = 0;
-          break;
-        case "6":
-          this.cowbellAudio.volume = 0;
-          break;
+    const audio = this.audioByTrack[muteIndex];
+    audio.volume = e.target.classList.contains("active") ? 0 : this.seqVolume;
+  }
+  setSeqVolume(volume) {
+    this.seqVolume = volume;
+    this.muteBtns.forEach((btn) => {
+      if (!btn.classList.contains("active")) {
+        const track = btn.getAttribute("data-track");
+        this.audioByTrack[track].volume = volume;
       }
-    } else {
-      switch (muteIndex) {
-        case "0":
-          this.kickAudio.volume = 1;
-          break;
-        case "1":
-          this.openhatAudio.volume = 1;
-          break;
-        case "2":
-          this.snareAudio.volume = 1;
-          break;
-        case "3":
-          this.hihatAudio.volume = 1;
-          break;
-        case "4":
-          this.clapAudio.volume = 1;
-          break;
-        case "5":
-          this.crashAudio.volume = 1;
-          break;
-        case "6":
-          this.cowbellAudio.volume = 1;
-          break;
-      }
-    }
+    });
   }
   changeTempo(e) {
     const tempoText = document.querySelector(".tempo-nbr");
@@ -255,6 +227,19 @@ drumKit.tempoSlider.addEventListener("change", function (e) {
 
 drumKit.resetBtn.addEventListener("click", () => {
   drumKit.reset();
+});
+
+const sekvencerVolumeSlider = document.querySelector(".sekvencer-volume-slider");
+const sekvencerVolumeText = document.querySelector(".sekvencer-volume-nbr");
+const DEFAULT_SEQ_VOLUME = 50;
+
+sekvencerVolumeSlider.value = DEFAULT_SEQ_VOLUME;
+sekvencerVolumeText.innerText = DEFAULT_SEQ_VOLUME;
+drumKit.setSeqVolume(DEFAULT_SEQ_VOLUME / 100);
+
+sekvencerVolumeSlider.addEventListener("input", (e) => {
+  drumKit.setSeqVolume(e.target.value / 100);
+  sekvencerVolumeText.innerText = e.target.value;
 });
 
 //*************     PIANO PART     ************
@@ -377,72 +362,82 @@ volumeSlider.addEventListener("input", (e) => {
   volumeText.innerText = e.target.value;
 });
 
-//*************     VOLUME KNOB     ************
+//*************     ROTIRAJUCI TOCKIC (KNOB)     ************
 
-const volumeKnob = document.getElementById("volume-knob");
 const KNOB_MIN_ANGLE = -135;
 const KNOB_MAX_ANGLE = 135;
+const KNOB_DRAG_PIXELS_FOR_FULL_RANGE = 200;
 
-function valueToAngle(value) {
-  const min = Number(volumeSlider.min);
-  const max = Number(volumeSlider.max);
-  return KNOB_MIN_ANGLE + ((value - min) / (max - min)) * (KNOB_MAX_ANGLE - KNOB_MIN_ANGLE);
-}
+function setupKnob(knob, slider) {
+  const min = Number(slider.min);
+  const max = Number(slider.max);
+  const range = max - min;
+  const valuePerPixel = range / KNOB_DRAG_PIXELS_FOR_FULL_RANGE;
+  const step = Math.max(1, Math.round(range / 50));
 
-function setKnobValue(value) {
-  value = Math.min(100, Math.max(0, Math.round(value)));
-  if (Number(volumeSlider.value) === value) return;
-  volumeSlider.value = value;
-  volumeKnob.style.transform = `rotate(${valueToAngle(value)}deg)`;
-  volumeKnob.setAttribute("aria-valuenow", value);
-  volumeSlider.dispatchEvent(new Event("input", { bubbles: true }));
-}
-
-volumeKnob.style.transform = `rotate(${valueToAngle(volumeSlider.value)}deg)`;
-volumeKnob.setAttribute("aria-valuenow", volumeSlider.value);
-
-let knobDragging = false;
-let knobStartX = 0;
-let knobStartY = 0;
-let knobStartValue = 0;
-
-volumeKnob.addEventListener("pointerdown", (e) => {
-  knobDragging = true;
-  knobStartX = e.clientX;
-  knobStartY = e.clientY;
-  knobStartValue = Number(volumeSlider.value);
-  volumeKnob.setPointerCapture(e.pointerId);
-});
-
-volumeKnob.addEventListener("pointermove", (e) => {
-  if (!knobDragging) return;
-  const deltaValue = (knobStartY - e.clientY + (e.clientX - knobStartX)) * 0.5;
-  setKnobValue(knobStartValue + deltaValue);
-});
-
-volumeKnob.addEventListener("pointerup", () => {
-  knobDragging = false;
-});
-volumeKnob.addEventListener("pointercancel", () => {
-  knobDragging = false;
-});
-
-volumeKnob.addEventListener(
-  "wheel",
-  (e) => {
-    e.preventDefault();
-    const direction = e.deltaY > 0 ? -1 : 1;
-    setKnobValue(Number(volumeSlider.value) + direction * 2);
-  },
-  { passive: false },
-);
-
-volumeKnob.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowUp" || e.key === "ArrowRight") {
-    e.preventDefault();
-    setKnobValue(Number(volumeSlider.value) + 2);
-  } else if (e.key === "ArrowDown" || e.key === "ArrowLeft") {
-    e.preventDefault();
-    setKnobValue(Number(volumeSlider.value) - 2);
+  function valueToAngle(value) {
+    return KNOB_MIN_ANGLE + ((value - min) / range) * (KNOB_MAX_ANGLE - KNOB_MIN_ANGLE);
   }
-});
+
+  function setKnobValue(value) {
+    value = Math.min(max, Math.max(min, Math.round(value)));
+    if (Number(slider.value) === value) return;
+    slider.value = value;
+    knob.style.transform = `rotate(${valueToAngle(value)}deg)`;
+    knob.setAttribute("aria-valuenow", value);
+    slider.dispatchEvent(new Event("input", { bubbles: true }));
+    slider.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+
+  knob.style.transform = `rotate(${valueToAngle(slider.value)}deg)`;
+  knob.setAttribute("aria-valuenow", slider.value);
+
+  let knobDragging = false;
+  let knobStartX = 0;
+  let knobStartY = 0;
+  let knobStartValue = 0;
+
+  knob.addEventListener("pointerdown", (e) => {
+    knobDragging = true;
+    knobStartX = e.clientX;
+    knobStartY = e.clientY;
+    knobStartValue = Number(slider.value);
+    knob.setPointerCapture(e.pointerId);
+  });
+
+  knob.addEventListener("pointermove", (e) => {
+    if (!knobDragging) return;
+    const deltaValue = (knobStartY - e.clientY + (e.clientX - knobStartX)) * valuePerPixel;
+    setKnobValue(knobStartValue + deltaValue);
+  });
+
+  knob.addEventListener("pointerup", () => {
+    knobDragging = false;
+  });
+  knob.addEventListener("pointercancel", () => {
+    knobDragging = false;
+  });
+
+  knob.addEventListener(
+    "wheel",
+    (e) => {
+      e.preventDefault();
+      const direction = e.deltaY > 0 ? -1 : 1;
+      setKnobValue(Number(slider.value) + direction * step);
+    },
+    { passive: false },
+  );
+
+  knob.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowRight") {
+      e.preventDefault();
+      setKnobValue(Number(slider.value) + step);
+    } else if (e.key === "ArrowDown" || e.key === "ArrowLeft") {
+      e.preventDefault();
+      setKnobValue(Number(slider.value) - step);
+    }
+  });
+}
+
+setupKnob(document.getElementById("volume-knob"), volumeSlider);
+setupKnob(document.getElementById("sekvencer-volume-knob"), sekvencerVolumeSlider);

@@ -259,6 +259,21 @@ select option{
      }
 
  }
+ .sekvencer-controls-row{
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     justify-content: flex-start;
+     gap: 1.5rem;
+     width: 100%;
+ }
+ .sekvencer-volume{
+     width: 310px; /* isto kao .volume, da se tockic poravna sa piano tockicem */
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 0.3rem;
+ }
  .tempo{
      margin:0.15rem;
      width: 30%;
@@ -322,7 +337,8 @@ select option{
     pointer-events: none;
  }
 .tempo-slider,
-.volume-slider{
+.volume-slider,
+.sekvencer-volume-slider{
     padding:0.2rem;
     appearance: none;
     margin:0.3rem 0rem;
@@ -336,7 +352,8 @@ select option{
 
 }
 .tempo p,
-.volume p{
+.volume p,
+.sekvencer-volume p{
     font-size: 1.2rem;
     color: white;
     text-align: center;

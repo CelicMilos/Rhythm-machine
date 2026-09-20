@@ -204,16 +204,45 @@
           <button class="play">PLAY</button>
           <button class="reset">RESET</button>
         </div>
-        <div class="tempo">
-          <input
-          type="range"
-          class="tempo-slider"
-          max="300"
-          min="20"
-          value="150"
-          autocomplete="off"
-          />
-          <p>Tempo: <span class="tempo-nbr">150</span></p>
+        <div class="sekvencer-controls-row">
+          <div class="sekvencer-volume">
+            <div class="knob-wrapper">
+              <div class="knob-ticks"></div>
+              <div
+                class="knob"
+                id="sekvencer-volume-knob"
+                tabindex="0"
+                role="slider"
+                aria-label="Jacina zvuka sekvencera"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="50"
+              >
+                <div class="knob-indicator"></div>
+              </div>
+            </div>
+            <input
+            type="range"
+            class="sekvencer-volume-slider"
+            max="100"
+            min="0"
+            value="50"
+            autocomplete="off"
+            hidden
+            />
+            <p>Volume: <span class="sekvencer-volume-nbr">50</span></p>
+          </div>
+          <div class="tempo">
+            <input
+            type="range"
+            class="tempo-slider"
+            max="300"
+            min="20"
+            value="150"
+            autocomplete="off"
+            />
+            <p>Tempo: <span class="tempo-nbr">150</span></p>
+          </div>
         </div>
       </div>
       <audio class="kick-sound" src="./zvukovi/kick-classic.wav"></audio>
