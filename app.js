@@ -402,11 +402,13 @@ volumeKnob.style.transform = `rotate(${valueToAngle(volumeSlider.value)}deg)`;
 volumeKnob.setAttribute("aria-valuenow", volumeSlider.value);
 
 let knobDragging = false;
+let knobStartX = 0;
 let knobStartY = 0;
 let knobStartValue = 0;
 
 volumeKnob.addEventListener("pointerdown", (e) => {
   knobDragging = true;
+  knobStartX = e.clientX;
   knobStartY = e.clientY;
   knobStartValue = Number(volumeSlider.value);
   volumeKnob.setPointerCapture(e.pointerId);
@@ -414,7 +416,7 @@ volumeKnob.addEventListener("pointerdown", (e) => {
 
 volumeKnob.addEventListener("pointermove", (e) => {
   if (!knobDragging) return;
-  const deltaValue = (knobStartY - e.clientY) * 0.5;
+  const deltaValue = (knobStartY - e.clientY + (e.clientX - knobStartX)) * 0.5;
   setKnobValue(knobStartValue + deltaValue);
 });
 
