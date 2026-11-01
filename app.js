@@ -72,6 +72,9 @@ class Drumkit {
           this.cowbellAudio.currentTime = 0;
           this.cowbellAudio.play();
         }
+        if (bar.classList.contains("bass-pad")) {
+          playBassStep(bar);
+        }
       }
     });
     this.index++;
@@ -441,3 +444,79 @@ function setupKnob(knob, slider) {
 
 setupKnob(document.getElementById("volume-knob"), volumeSlider);
 setupKnob(document.getElementById("sekvencer-volume-knob"), sekvencerVolumeSlider);
+
+//*************     BAS SEKVENCER     ************
+
+const bassSelect = document.getElementById("bass-select");
+const bassMuteBtn = document.querySelector(".bass-mute");
+const bassCutoffSlider = document.querySelector(".bass-cutoff-slider");
+const bassDecaySlider = document.querySelector(".bass-decay-slider");
+const bassOctaveSlider = document.querySelector(".bass-octave-slider");
+
+let bassWaveform = bassSelect.value;
+let bassMuted = false;
+let bassCutoff = Number(bassCutoffSlider.value);
+let bassDecayMs = Number(bassDecaySlider.value);
+let bassOctave = Number(bassOctaveSlider.value);
+
+bassSelect.addEventListener("change", (e) => {
+  bassWaveform = e.target.value;
+});
+
+bassMuteBtn.addEventListener("click", () => {
+  bassMuted = !bassMuted;
+  bassMuteBtn.classList.toggle("active", bassMuted);
+});
+
+bassCutoffSlider.addEventListener("input", (e) => {
+  bassCutoff = Number(e.target.value);
+});
+bassDecaySlider.addEventListener("input", (e) => {
+  bassDecayMs = Number(e.target.value);
+});
+bassOctaveSlider.addEventListener("input", (e) => {
+  bassOctave = Number(e.target.value);
+});
+
+function playBassNote(note, accent = false) {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  const now = audioCtx.currentTime;
+  const decaySec = bassDecayMs / 1000;
+  const peakGain = 0.5 * drumKit.seqVolume * (accent ? 1.4 : 1);
+  const cutoffFreq = Math.min(8000, bassCutoff * (accent ? 1.6 : 1));
+
+  const oscillator = audioCtx.createOscillator();
+  oscillator.type = bassWaveform;
+  oscillator.frequency.value = NOTE_FREQUENCIES[note] * Math.pow(2, bassOctave);
+
+  const filter = audioCtx.createBiquadFilter();
+  filter.type = "lowpass";
+  filter.frequency.value = cutoffFreq;
+
+  const gainNode = audioCtx.createGain();
+  gainNode.gain.setValueAtTime(0, now);
+  gainNode.gain.linearRampToValueAtTime(peakGain, now + 0.01);
+  gainNode.gain.exponentialRampToValueAtTime(0.0001, now + decaySec);
+
+  oscillator.connect(filter);
+  filter.connect(gainNode);
+  gainNode.connect(audioCtx.destination);
+
+  oscillator.start(now);
+  oscillator.stop(now + decaySec + 0.05);
+}
+
+function playBassStep(padEl) {
+  if (bassMuted) return;
+  const noteLabel = padEl.dataset.note;
+  if (!noteLabel) return;
+  const note = noteLabel.replace(/\d+$/, "");
+  if (!NOTE_FREQUENCIES[note]) return;
+  playBassNote(note, padEl.classList.contains("accent"));
+}
+
+setupKnob(document.getElementById("bass-cutoff-knob"), bassCutoffSlider);
+setupKnob(document.getElementById("bass-decay-knob"), bassDecaySlider);
+setupKnob(document.getElementById("bass-octave-knob"), bassOctaveSlider);

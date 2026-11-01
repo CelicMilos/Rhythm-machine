@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8" />
+<title>Bas sintisajzer - prototip izgleda</title>
+<link rel="stylesheet" href="./stilovi.css" />
+<style>
+  body{ overflow:auto; justify-content:flex-start; padding:3rem 1rem; }
+
+  .naslov{
+    color:rgb(207,207,207);
+    font-family:Arial, Helvetica, sans-serif;
+    text-align:center;
+  }
+  .naslov h2{ font-weight:600; font-size:1.4rem; margin-bottom:0.3rem; }
+  .naslov p{ font-size:0.9rem; color:rgba(207,207,207,0.55); margin-bottom:1.5rem; }
+
+  /* ---- red za bas traku, isti obrazac kao kick-track/snare-track ---- */
+  .bass-track{
+    display:grid;
+    grid-template-columns: 340px 1fr;
+    align-items:center;
+    gap:1.2rem;
+    width:100%;
+    background: rgba(186, 143, 255, 0.05);
+    border-radius: 8px;
+    padding: 0.5rem 1.2rem;
+  }
+  .bass-kontrole select{ width:150px; }
+
+  .bass-steps{
+    display:grid;
+    grid-template-columns: repeat(8, 1fr);
+    align-items:end;
+    gap:0.6rem;
+  }
+  .bass-pad{
+    width:100%;
+    height:2.6rem;
+    border:2px solid rgba(186, 143, 255, 0.55);
+    background-color: transparent;
+    border-radius:4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: rgba(255,255,255,0.35);
+    font-size:0.75rem;
+    font-weight:600;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: all 0.2s ease;
+  }
+  .bass-pad.empty{ border-style:dashed; opacity:0.5; }
+  .bass-pad.active{
+    background-color: rgb(186, 143, 255);
+    color: rgb(30, 10, 45);
+    box-shadow: 0 0 14px rgba(186, 143, 255, 0.55);
+  }
+  .bass-pad.active.accent{
+    background-color: rgb(255, 143, 210);
+    box-shadow: 0 0 14px rgba(255, 143, 210, 0.55);
+  }
+
+  .bass-knobs{
+    display:flex;
+    justify-content:center;
+    gap:3rem;
+    margin-top:1.2rem;
+  }
+  .bass-knob-col{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0.3rem;
+  }
+  .bass-knob-col p{
+    font-size:0.85rem;
+    color:rgba(207,207,207,0.8);
+    letter-spacing: 0.05em;
+  }
+  .knob-wrapper.mini{ width:58px; height:58px; }
+
+  .legenda{
+    margin-top:2rem;
+    text-align:center;
+    color:rgba(207,207,207,0.4);
+    font-size:0.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+</style>
+</head>
+<body>
+
+  <div class="naslov">
+    <h2>BAS &middot; step sequencer</h2>
+    <p>Prototip izgleda &mdash; bez funkcionalnosti, samo vizuelni primer nove trake</p>
+  </div>
+
+  <div class="sekvencer" style="max-width:1000px;">
+
+    <div class="bass-track">
+      <div class="kontrole bass-kontrole">
+        <h1>BAS</h1>
+        <select disabled>
+          <option>Saw</option>
+        </select>
+        <button class="mute">M</button>
+      </div>
+
+      <div class="bass-steps">
+        <div class="bass-pad active">C2</div>
+        <div class="bass-pad empty">-</div>
+        <div class="bass-pad active">C2</div>
+        <div class="bass-pad active accent">Eb2</div>
+        <div class="bass-pad empty">-</div>
+        <div class="bass-pad active">G2</div>
+        <div class="bass-pad empty">-</div>
+        <div class="bass-pad active">C2</div>
+      </div>
+    </div>
+
+    <div class="bass-knobs">
+      <div class="bass-knob-col">
+        <div class="knob-wrapper mini">
+          <div class="knob-ticks"></div>
+          <div class="knob" style="transform:rotate(-60deg)"><div class="knob-indicator"></div></div>
+        </div>
+        <p>CUTOFF</p>
+      </div>
+      <div class="bass-knob-col">
+        <div class="knob-wrapper mini">
+          <div class="knob-ticks"></div>
+          <div class="knob" style="transform:rotate(10deg)"><div class="knob-indicator"></div></div>
+        </div>
+        <p>DECAY</p>
+      </div>
+      <div class="bass-knob-col">
+        <div class="knob-wrapper mini">
+          <div class="knob-ticks"></div>
+          <div class="knob" style="transform:rotate(90deg)"><div class="knob-indicator"></div></div>
+        </div>
+        <p>OKTAVA</p>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="legenda">Ljubičasti padovi = aktivan korak sa notom &middot; isprekidani = prazan korak &middot; roze = primer akcenta</p>
+
+</body>
+</html>

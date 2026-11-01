@@ -200,6 +200,113 @@
             <div class="pad cowbell-pad b7"></div>
           </div>
         </div>
+        <div class="bass-track">
+          <div class="kontrole bass-kontrole">
+            <h1>Bas</h1>
+            <button data-track="7" class="bass-mute">
+              <i class="fas fa-volume-mute"></i>
+            </button>
+            <select name="bass-select" id="bass-select">
+              <option value="sine">Sine</option>
+              <option value="square">Square</option>
+              <option value="sawtooth" selected>Sawtooth</option>
+              <option value="triangle">Triangle</option>
+            </select>
+          </div>
+          <div class="bass-steps">
+            <div class="pad bass-pad active b0" data-note="C2">C2</div>
+            <div class="pad bass-pad empty b1" data-note="">-</div>
+            <div class="pad bass-pad active b2" data-note="C2">C2</div>
+            <div class="pad bass-pad active accent b3" data-note="Eb2">Eb2</div>
+            <div class="pad bass-pad empty b4" data-note="">-</div>
+            <div class="pad bass-pad active b5" data-note="G2">G2</div>
+            <div class="pad bass-pad empty b6" data-note="">-</div>
+            <div class="pad bass-pad active b7" data-note="C2">C2</div>
+          </div>
+          <div class="bass-knobs">
+            <div class="bass-knob-col">
+              <div class="knob-wrapper mini">
+                <div class="knob-ticks"></div>
+                <div
+                  class="knob"
+                  id="bass-cutoff-knob"
+                  tabindex="0"
+                  role="slider"
+                  aria-label="Cutoff"
+                  aria-valuemin="200"
+                  aria-valuemax="4000"
+                  aria-valuenow="1000"
+                >
+                  <div class="knob-indicator"></div>
+                </div>
+              </div>
+              <input
+                type="range"
+                class="bass-cutoff-slider"
+                max="4000"
+                min="200"
+                value="1000"
+                autocomplete="off"
+                hidden
+              />
+              <p>Cutoff</p>
+            </div>
+            <div class="bass-knob-col">
+              <div class="knob-wrapper mini">
+                <div class="knob-ticks"></div>
+                <div
+                  class="knob"
+                  id="bass-decay-knob"
+                  tabindex="0"
+                  role="slider"
+                  aria-label="Decay"
+                  aria-valuemin="50"
+                  aria-valuemax="800"
+                  aria-valuenow="250"
+                >
+                  <div class="knob-indicator"></div>
+                </div>
+              </div>
+              <input
+                type="range"
+                class="bass-decay-slider"
+                max="800"
+                min="50"
+                value="250"
+                autocomplete="off"
+                hidden
+              />
+              <p>Decay</p>
+            </div>
+            <div class="bass-knob-col">
+              <div class="knob-wrapper mini">
+                <div class="knob-ticks"></div>
+                <div
+                  class="knob"
+                  id="bass-octave-knob"
+                  tabindex="0"
+                  role="slider"
+                  aria-label="Oktava"
+                  aria-valuemin="-4"
+                  aria-valuemax="0"
+                  aria-valuenow="-2"
+                >
+                  <div class="knob-indicator"></div>
+                </div>
+              </div>
+              <input
+                type="range"
+                class="bass-octave-slider"
+                max="0"
+                min="-4"
+                value="-2"
+                autocomplete="off"
+                hidden
+              />
+              <p>Oktava</p>
+            </div>
+          </div>
+        </div>
         <div class="controles">
           <button class="play">PLAY</button>
           <button class="reset">RESET</button>
