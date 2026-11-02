@@ -1,5 +1,4 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -18,7 +17,9 @@
             </button>
             <select name="kick-select" id="kick-select">
               <option value="./zvukovi/kick-808.wav">Kick 808</option>
-              <option value="./zvukovi/kick-acoustic01.wav">Kick Acoustic</option>
+              <option value="./zvukovi/kick-acoustic01.wav">
+                Kick Acoustic
+              </option>
               <option value="./zvukovi/kick-classic.wav">Kick Classic</option>
               <option value="./zvukovi/kick-big.wav">Kick Big</option>
               <option value="./zvukovi/kick-deep.wav">Kick Deep</option>
@@ -50,8 +51,12 @@
             </button>
             <select name="openhat-select" id="openhat-select">
               <option value="./zvukovi/openhat-808.wav">Openhat 808</option>
-              <option value="./zvukovi/openhat-acoustic01.wav">Open Acoustic</option>
-              <option value="./zvukovi/openhat-analog.wav">Openhat Analog</option>
+              <option value="./zvukovi/openhat-acoustic01.wav">
+                Open Acoustic
+              </option>
+              <option value="./zvukovi/openhat-analog.wav">
+                Openhat Analog
+              </option>
               <option value="./zvukovi/openhat-slick.wav">Openhat Slick</option>
               <option value="./zvukovi/openhat-tight.wav">Openhat Tight</option>
             </select>
@@ -79,7 +84,9 @@
             </button>
             <select name="snare-select" id="snare-select">
               <option value="./zvukovi/snare-808.wav">Snare 808</option>
-              <option value="./zvukovi/snare-acoustic01.wav">Snare Acoustic</option>
+              <option value="./zvukovi/snare-acoustic01.wav">
+                Snare Acoustic
+              </option>
               <option value="./zvukovi/snare-big.wav">Snare</option>
               <option value="./zvukovi/snare-electro.wav">Snare Electro</option>
               <option value="./zvukovi/snare-lofi01.wav">Snare LoFi</option>
@@ -108,7 +115,9 @@
             </button>
             <select name="hihat-select" id="hihat-select">
               <option value="./zvukovi/hihat-808.wav">Hihat 808</option>
-              <option value="./zvukovi/hihat-acoustic01.wav">Hihat Acoustic</option>
+              <option value="./zvukovi/hihat-acoustic01.wav">
+                Hihat Acoustic
+              </option>
               <option value="./zvukovi/hihat-analog.wav">Hihat Analog</option>
               <option value="./zvukovi/hihat-digital.wav">Hihat Digital</option>
               <option value="./zvukovi/hihat-electro.wav">Hihat Electro</option>
@@ -163,7 +172,9 @@
             </button>
             <select name="crash-select" id="crash-select">
               <option value="./zvukovi/crash-808.wav">Crash 808</option>
-              <option value="./zvukovi/crash-acoustic.wav">Crash Acoustic</option>
+              <option value="./zvukovi/crash-acoustic.wav">
+                Crash Acoustic
+              </option>
               <option value="./zvukovi/crash-noise.wav">Crash Noise</option>
               <option value="./zvukovi/crash-tape.wav">Crash Tape</option>
             </select>
@@ -213,14 +224,15 @@
               <option value="triangle">Triangle</option>
             </select>
           </div>
+          <div class="bass-tooltip">Double click for higher tone</div>
           <div class="bass-steps">
             <div class="pad bass-pad active b0" data-note="C2">C2</div>
-            <div class="pad bass-pad empty b1" data-note="">-</div>
+            <div class="pad bass-pad active b1" data-note="C2">C2</div>
             <div class="pad bass-pad active b2" data-note="C2">C2</div>
-            <div class="pad bass-pad active accent b3" data-note="Eb2">Eb2</div>
-            <div class="pad bass-pad empty b4" data-note="">-</div>
-            <div class="pad bass-pad active b5" data-note="G2">G2</div>
-            <div class="pad bass-pad empty b6" data-note="">-</div>
+            <div class="pad bass-pad active b3" data-note="C2">C2</div>
+            <div class="pad bass-pad active b4" data-note="C2">C2</div>
+            <div class="pad bass-pad active b5" data-note="C2">C2</div>
+            <div class="pad bass-pad active b6" data-note="C2">C2</div>
             <div class="pad bass-pad active b7" data-note="C2">C2</div>
           </div>
           <div class="bass-knobs">
@@ -329,24 +341,24 @@
               </div>
             </div>
             <input
-            type="range"
-            class="sekvencer-volume-slider"
-            max="100"
-            min="0"
-            value="50"
-            autocomplete="off"
-            hidden
+              type="range"
+              class="sekvencer-volume-slider"
+              max="100"
+              min="0"
+              value="50"
+              autocomplete="off"
+              hidden
             />
             <p>Volume: <span class="sekvencer-volume-nbr">50</span></p>
           </div>
           <div class="tempo">
             <input
-            type="range"
-            class="tempo-slider"
-            max="300"
-            min="20"
-            value="150"
-            autocomplete="off"
+              type="range"
+              class="tempo-slider"
+              max="300"
+              min="20"
+              value="150"
+              autocomplete="off"
             />
             <p>Tempo: <span class="tempo-nbr">150</span></p>
           </div>
@@ -410,13 +422,13 @@
           </div>
         </div>
         <input
-        type="range"
-        class="volume-slider"
-        max="100"
-        min="0"
-        value="50"
-        autocomplete="off"
-        hidden
+          type="range"
+          class="volume-slider"
+          max="100"
+          min="0"
+          value="50"
+          autocomplete="off"
+          hidden
         />
         <p>Volume: <span class="volume-nbr">50</span></p>
       </div>
@@ -435,11 +447,10 @@
       <audio id="B" src="./notes/B.wav"></audio>
     </div>
     <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-        integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs="
-        crossorigin="anonymous"
-      ></script>
-      <script src="app.js"></script>
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+      integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs="
+      crossorigin="anonymous"
+    ></script>
+    <script src="app.js"></script>
   </body>
 </html>
-

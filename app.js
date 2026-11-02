@@ -170,7 +170,7 @@ class Drumkit {
 
     // 3. Ukloni sve active padove i animacije
     this.pads.forEach((pad) => {
-      pad.classList.remove("active");
+      pad.classList.remove("active", "accent");
       pad.style.animation = "none";
     });
 
@@ -461,6 +461,30 @@ let bassOctave = Number(bassOctaveSlider.value);
 
 bassSelect.addEventListener("change", (e) => {
   bassWaveform = e.target.value;
+});
+
+const bassTooltip = document.querySelector(".bass-tooltip");
+const BASS_TOOLTIP_DURATION = 3000;
+let bassTooltipShown = false;
+
+function showBassTooltip(pad) {
+  if (bassTooltipShown) return;
+  bassTooltipShown = true;
+  const rect = pad.getBoundingClientRect();
+  bassTooltip.style.left = `${rect.left + rect.width / 2}px`;
+  bassTooltip.style.top = `${rect.top}px`;
+  bassTooltip.classList.add("visible");
+  setTimeout(() => {
+    bassTooltip.classList.remove("visible");
+  }, BASS_TOOLTIP_DURATION);
+}
+
+document.querySelectorAll(".bass-pad").forEach((pad) => {
+  pad.addEventListener("dblclick", () => {
+    pad.classList.toggle("accent");
+    pad.classList.add("active");
+  });
+  pad.addEventListener("mouseenter", () => showBassTooltip(pad));
 });
 
 bassMuteBtn.addEventListener("click", () => {
