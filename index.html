@@ -405,32 +405,117 @@
           <div data-note="E" data-octave="1" class="key white"></div>
         </div>
       </div>
-      <div class="volume">
-        <div class="knob-wrapper">
-          <div class="knob-ticks"></div>
-          <div
-            class="knob"
-            id="volume-knob"
-            tabindex="0"
-            role="slider"
-            aria-label="Volume"
-            aria-valuemin="0"
-            aria-valuemax="100"
-            aria-valuenow="50"
-          >
-            <div class="knob-indicator"></div>
+      <div class="piano-controls-row">
+        <div class="volume">
+          <div class="knob-wrapper">
+            <div class="knob-ticks"></div>
+            <div
+              class="knob"
+              id="volume-knob"
+              tabindex="0"
+              role="slider"
+              aria-label="Volume"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="50"
+            >
+              <div class="knob-indicator"></div>
+            </div>
+          </div>
+          <input
+            type="range"
+            class="volume-slider"
+            max="100"
+            min="0"
+            value="50"
+            autocomplete="off"
+            hidden
+          />
+          <p>Volume: <span class="volume-nbr">50</span></p>
+        </div>
+        <div class="piano-knobs">
+          <div class="bass-knob-col">
+            <div class="knob-wrapper mini">
+              <div class="knob-ticks"></div>
+              <div
+                class="knob"
+                id="piano-cutoff-knob"
+                tabindex="0"
+                role="slider"
+                aria-label="Cutoff"
+                aria-valuemin="200"
+                aria-valuemax="10000"
+                aria-valuenow="10000"
+              >
+                <div class="knob-indicator"></div>
+              </div>
+            </div>
+            <input
+              type="range"
+              class="piano-cutoff-slider"
+              max="10000"
+              min="200"
+              value="10000"
+              autocomplete="off"
+              hidden
+            />
+            <p>Cutoff</p>
+          </div>
+          <div class="bass-knob-col">
+            <div class="knob-wrapper mini">
+              <div class="knob-ticks"></div>
+              <div
+                class="knob"
+                id="piano-decay-knob"
+                tabindex="0"
+                role="slider"
+                aria-label="Decay"
+                aria-valuemin="10"
+                aria-valuemax="190"
+                aria-valuenow="100"
+              >
+                <div class="knob-indicator"></div>
+              </div>
+            </div>
+            <input
+              type="range"
+              class="piano-decay-slider"
+              max="190"
+              min="10"
+              value="100"
+              autocomplete="off"
+              hidden
+            />
+            <p>Decay</p>
+          </div>
+          <div class="bass-knob-col piano-octave-col">
+            <div class="knob-wrapper mini">
+              <div class="knob-ticks"></div>
+              <div
+                class="knob"
+                id="piano-octave-knob"
+                tabindex="0"
+                role="slider"
+                aria-label="Oktava"
+                aria-valuemin="-2"
+                aria-valuemax="2"
+                aria-valuenow="0"
+              >
+                <div class="knob-indicator"></div>
+              </div>
+            </div>
+            <input
+              type="range"
+              class="piano-octave-slider"
+              max="2"
+              min="-2"
+              value="0"
+              autocomplete="off"
+              hidden
+            />
+            <p>Oktava</p>
           </div>
         </div>
-        <input
-          type="range"
-          class="volume-slider"
-          max="100"
-          min="0"
-          value="50"
-          autocomplete="off"
-          hidden
-        />
-        <p>Volume: <span class="volume-nbr">50</span></p>
       </div>
 
       <audio id="C" src="./notes/C.wav"></audio>

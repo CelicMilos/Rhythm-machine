@@ -301,6 +301,7 @@ function playNote(key) {
   key.classList.add("active");
   if (instrumentSelect.value === "piano") {
     const noteAudio = document.getElementById(key.dataset.note);
+    applyPianoEffects(noteAudio);
     noteAudio.currentTime = 0;
     noteAudio.play();
     noteAudio.addEventListener("ended", () => {
@@ -325,6 +326,8 @@ function playSynthNote(note, waveform, octave = 0) {
   }
   const now = audioCtx.currentTime;
   const peakGain = 0.3 * (volumeSlider.value / 100);
+  const decaySec = SYNTH_DECAY_SEC * (Number(pianoDecaySlider.value) / 100);
+  const totalOctave = octave + Number(pianoOctaveSlider.value);
 
   const oscillator = audioCtx.createOscillator();
   if (waveform === "saxophone") {
@@ -332,17 +335,22 @@ function playSynthNote(note, waveform, octave = 0) {
   } else {
     oscillator.type = waveform;
   }
-  oscillator.frequency.value = NOTE_FREQUENCIES[note] * Math.pow(2, octave);
+  oscillator.frequency.value = NOTE_FREQUENCIES[note] * Math.pow(2, totalOctave);
+
+  const filter = audioCtx.createBiquadFilter();
+  filter.type = "lowpass";
+  filter.frequency.value = Number(pianoCutoffSlider.value);
 
   const gainNode = audioCtx.createGain();
   gainNode.gain.setValueAtTime(0, now);
   gainNode.gain.linearRampToValueAtTime(peakGain, now + 0.02);
-  gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.6);
+  gainNode.gain.exponentialRampToValueAtTime(0.0001, now + decaySec);
 
-  oscillator.connect(gainNode);
+  oscillator.connect(filter);
+  filter.connect(gainNode);
   gainNode.connect(audioCtx.destination);
   oscillator.start(now);
-  oscillator.stop(now + 0.6);
+  oscillator.stop(now + decaySec);
 
   return oscillator;
 }
@@ -544,3 +552,63 @@ function playBassStep(padEl) {
 setupKnob(document.getElementById("bass-cutoff-knob"), bassCutoffSlider);
 setupKnob(document.getElementById("bass-decay-knob"), bassDecaySlider);
 setupKnob(document.getElementById("bass-octave-knob"), bassOctaveSlider);
+
+//*************     KLAVIJATURA EFEKTI (CUTOFF / DECAY / OKTAVA)     ************
+
+const pianoCutoffSlider = document.querySelector(".piano-cutoff-slider");
+const pianoDecaySlider = document.querySelector(".piano-decay-slider");
+const pianoOctaveSlider = document.querySelector(".piano-octave-slider");
+const pianoOctaveCol = document.querySelector(".piano-octave-col");
+const SYNTH_DECAY_SEC = 0.6;
+// Web Audio ne moze da obradi lokalne snimke kad je stranica otvorena direktno (file://)
+const canProcessPiano = location.protocol !== "file:";
+const pianoChains = {};
+
+function getPianoChain(noteAudio) {
+  if (!pianoChains[noteAudio.id]) {
+    const source = audioCtx.createMediaElementSource(noteAudio);
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = "lowpass";
+    const gainNode = audioCtx.createGain();
+    source.connect(filter);
+    filter.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    pianoChains[noteAudio.id] = { filter, gainNode };
+  }
+  return pianoChains[noteAudio.id];
+}
+
+function applyPianoEffects(noteAudio) {
+  if (!canProcessPiano) return;
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (audioCtx.state === "suspended") audioCtx.resume();
+  const { filter, gainNode } = getPianoChain(noteAudio);
+  const now = audioCtx.currentTime;
+  const decayPercent = Number(pianoDecaySlider.value);
+
+  // jacinu sada odredjuje gainNode, da se ne bi dva puta stisavalo
+  noteAudio.volume = 1;
+  filter.frequency.value = Number(pianoCutoffSlider.value);
+  gainNode.gain.cancelScheduledValues(now);
+  gainNode.gain.setValueAtTime(volumeSlider.value / 100, now);
+  // snimak ne moze da traje duze nego sto jeste, pa decay iznad 100% nema efekta
+  if (decayPercent < 100 && noteAudio.duration) {
+    gainNode.gain.exponentialRampToValueAtTime(
+      0.0001,
+      now + noteAudio.duration * (decayPercent / 100),
+    );
+  }
+}
+
+function updatePianoOctaveKnob() {
+  pianoOctaveCol.classList.toggle("disabled", instrumentSelect.value === "piano");
+}
+
+instrumentSelect.addEventListener("change", updatePianoOctaveKnob);
+updatePianoOctaveKnob();
+
+setupKnob(document.getElementById("piano-cutoff-knob"), pianoCutoffSlider);
+setupKnob(document.getElementById("piano-decay-knob"), pianoDecaySlider);
+setupKnob(document.getElementById("piano-octave-knob"), pianoOctaveSlider);

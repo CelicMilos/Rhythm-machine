@@ -414,17 +414,15 @@ select option{
 /* ---- Stil bas trake (step sequencer) ---- */
 
 .bass-track{
+    position:relative;
     display:grid;
-    grid-template-columns: 340px 1fr auto;
+    grid-template-columns: 340px 1fr; /* isto kao ostale trake, da padovi budu iste sirine */
     align-items:center;
     gap:1.2rem;
     width:100%;
     background: rgba(186, 143, 255, 0.05);
     border-radius: 8px;
     padding: 0.15rem 1.2rem;
-}
-.bass-kontrole select{
-    width:150px;
 }
 .bass-mute{
     width:2.4rem;
@@ -492,6 +490,11 @@ select option{
     box-shadow: 0 0 14px rgba(255, 143, 210, 0.55);
 }
 .bass-knobs{
+    /* tockici desno van trake, da ne suzavaju padove */
+    position:absolute;
+    left:calc(100% + 1rem);
+    top:50%;
+    transform:translateY(-50%);
     display:flex;
     justify-content:center;
     gap:1rem;
@@ -501,6 +504,29 @@ select option{
     flex-direction:column;
     align-items:center;
     gap:0.15rem;
+}
+.bass-knob-col.disabled{
+    opacity:0.35;
+    pointer-events:none;
+}
+.piano-controls-row{
+    display:flex;
+    align-items:flex-start;
+    gap:0.5rem;
+}
+.piano-knobs{
+    display:flex;
+    gap:1.3rem;
+    /* centri tockica u ravni sa Volume tockicem (80.5px) */
+    margin-top: calc(0.15rem + (80.5px - 54.6px) / 2);
+}
+/* 30% veci od bas tockica */
+.piano-knobs .knob-wrapper.mini{
+    width:54.6px;
+    height:54.6px;
+}
+.piano-knobs .bass-knob-col p{
+    font-size:0.91rem;
 }
 .bass-knob-col p{
     font-size:0.7rem;
